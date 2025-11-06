@@ -10,7 +10,7 @@ export const content = {
         secondary: "Contact Me",
       },
       links: {
-        email: "bigchirv 'at' gmail 'dot' com",
+        email: "bigchirv@gmail.com",
         linkedin: "https://www.linkedin.com/in/irvingbermudez",
         github: "https://github.com/chirvo",
       },
