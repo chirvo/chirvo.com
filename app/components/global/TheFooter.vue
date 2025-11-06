@@ -1,14 +1,14 @@
 <template>
-  <footer class="bg-dark py-6">
+  <footer class="bg-light py-6">
     <div class="container mx-auto px-6 flex justify-between items-center">
       <div>
-        <p class="text-light">{{ footerContent.copyright }}</p>
+        <p class="text-dark">{{ footerContent.copyright }}</p>
       </div>
       <div>
-        <a :href="footerContent.links.github" target="_blank" rel="noopener noreferrer" class="text-light mx-2">
+        <a :href="footerContent.links.github" target="_blank" rel="noopener noreferrer" class="text-dark mx-2">
           <Icon name="simple-icons:github" size="24" />
         </a>
-        <a :href="footerContent.links.linkedin" target="_blank" rel="noopener noreferrer" class="text-light mx-2">
+        <a :href="footerContent.links.linkedin" target="_blank" rel="noopener noreferrer" class="text-dark mx-2">
           <Icon name="simple-icons:linkedin" size="24" />
         </a>
       </div>

@@ -1,5 +1,5 @@
 <template>
-  <section id="experience" class="py-20 bg-dark">
+  <section id="experience" class="py-20 bg-light">
     <div class="container mx-auto px-6">
       <h2 class="text-3xl font-bold text-center mb-12">{{ experienceContent.title }}</h2>
       <div class="relative">
