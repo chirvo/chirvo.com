@@ -51,40 +51,40 @@ This is the granular, step-by-step implementation plan. Mark tasks as complete (
 
 #### **Phase 1: Foundation & Project Setup**
 
-* [ ] **Task 1: Environment & Tooling**
-    * [ ] Initialize a new Git repository and connect it to a hosting provider (Vercel/Netlify).
-    * [ ] Initialize a new Nuxt 3 project (`npx nuxi@latest init .`).
-    * [ ] Install and configure the Nuxt Tailwind CSS module (`npx nuxi@latest module add tailwindcss`).
-    * [ ] Install and configure `nuxt-icon` and `@nuxt/image` modules.
-* [ ] **Task 2: Design System & Project Structure**
-    * [ ] Create the directory structure: `components/global/`, `components/sections/`, `assets/images/`.
-    * [ ] Define the core color palette and fonts in `tailwind.config.js` and a global CSS file.
+* [x] **Task 1: Environment & Tooling**
+    * [x] Initialize a new Git repository and connect it to a hosting provider (Vercel/Netlify).
+    * [x] Initialize a new Nuxt 3 project (`npx nuxi@latest init .`).
+    * [x] Install and configure the Nuxt Tailwind CSS module (`npx nuxi@latest module add tailwindcss`).
+    * [x] Install and configure `nuxt-icon` and `@nuxt/image` modules.
+* [x] **Task 2: Design System & Project Structure**
+    * [x] Create the directory structure: `components/global/`, `components/sections/`, `assets/images/`.
+    * [x] Define the core color palette and fonts in `tailwind.config.js` and a global CSS file.
 
 #### **Phase 2: Content & Asset Creation**
 
-* [ ] **Task 1: Content Aggregation**
-    * [ ] Create a `lib/content.js` file to store all static text content (hero pitch, project descriptions, etc.) to separate it from the UI components.
-* [ ] **Task 2: Asset Preparation**
+* [x] **Task 1: Content Aggregation**
+    * [x] Create a `lib/content.js` file to store all static text content (hero pitch, project descriptions, etc.) to separate it from the UI components.
+* [x] **Task 2: Asset Preparation**
     * [ ] Process and compress a professional headshot, saving it as a `.webp` in `assets/images/`.
-    * [ ] Create or source minimalist vector graphics (SVG) for each of the featured projects.
-    * [ ] Compile a list of icon names (from a library like Material Design Icons) needed for the skills section.
+    * [x] Create or source minimalist vector graphics (SVG) for each of the featured projects.
+    * [x] Compile a list of icon names (from a library like Material Design Icons) needed for the skills section.
 
 #### **Phase 3: Development & Implementation**
 
-* [ ] **Task 1: Build Global Components**
-    * [ ] Create `components/global/TheHeader.vue`: A sticky navbar with smooth-scroll navigation links and a mobile-responsive hamburger menu.
-    * [ ] Create `components/global/TheFooter.vue`: A simple footer with social links and a copyright notice.
-* [ ] **Task 2: Build `app.vue` Layout**
-    * [ ] Structure the main `app.vue` to sequentially include the header, all section components, and the footer.
-* [ ] **Task 3: Build Section Components**
-    * [ ] `components/sections/Hero.vue`: Implement the full-screen hero section with headline, sub-headline, and CTA buttons.
-    * [ ] `components/sections/About.vue`: Create a two-column layout with the headshot and narrative text.
-    * [ ] `components/sections/Skills.vue`: Use a CSS Grid to create the three-pillar layout, populating it with skill "pills" (icon + text).
-    * [ ] `components/sections/Projects.vue`:
-        * [ ] First, build a reusable `components/ProjectCard.vue` component that accepts props for project data.
-        * [ ] Then, in `Projects.vue`, use a `v-for` loop to render the project cards from the content file in a responsive grid.
-    * [ ] `components/sections/Experience.vue`: Implement the vertical timeline using CSS with `position: relative/absolute` for item placement.
-    * [ ] `components/sections/Contact.vue`: Build the contact form. If deploying to Netlify, add the `data-netlify="true"` attribute for seamless submission handling.
+* [x] **Task 1: Build Global Components**
+    * [x] Create `components/global/TheHeader.vue`: A sticky navbar with smooth-scroll navigation links and a mobile-responsive hamburger menu.
+    * [x] Create `components/global/TheFooter.vue`: A simple footer with social links and a copyright notice.
+* [x] **Task 2: Build `app.vue` Layout**
+    * [x] Structure the main `app.vue` to sequentially include the header, all section components, and the footer.
+* [x] **Task 3: Build Section Components**
+    * [x] `components/sections/Hero.vue`: Implement the full-screen hero section with headline, sub-headline, and CTA buttons.
+    * [x] `components/sections/About.vue`: Create a two-column layout with the headshot and narrative text.
+    * [x] `components/sections/Skills.vue`: Use a CSS Grid to create the three-pillar layout, populating it with skill "pills" (icon + text).
+    * [x] `components/sections/Projects.vue`:
+        * [x] First, build a reusable `components/ProjectCard.vue` component that accepts props for project data.
+        * [x] Then, in `Projects.vue`, use a `v-for` loop to render the project cards from the content file in a responsive grid.
+    * [x] `components/sections/Experience.vue`: Implement the vertical timeline using CSS with `position: relative/absolute` for item placement.
+    * [x] `components/sections/Contact.vue`: Build the contact form. If deploying to Netlify, add the `data-netlify="true"` attribute for seamless submission handling.
 
 #### **Phase 4: Finalization & Deployment**
 

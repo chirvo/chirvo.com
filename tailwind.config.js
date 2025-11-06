@@ -11,9 +11,13 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: '#007BFF',
-        light: '#F8F9FA',
-        dark: '#343A40',
+        primary: '#00AFFF', // A brighter blue
+        light: '#E5E5E5',   // A slightly darker off-white
+        dark: '#212529',   // A darker gray
+      },
+      fontFamily: {
+        roboto: ['Roboto', 'sans-serif'],
+        montserrat: ['Montserrat', 'sans-serif'],
       },
     },
   },

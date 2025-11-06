@@ -1,4 +1,5 @@
 export const icons = {
+  // Existing icons
   javascript: 'simple-icons:javascript',
   typescript: 'simple-icons:typescript',
   vuejs: 'simple-icons:vuedotjs',
@@ -21,4 +22,25 @@ export const icons = {
   wordpress: 'simple-icons:wordpress',
   network: 'simple-icons:serverless',
   database: 'simple-icons:serverless',
+
+  // New icons
+  fullstackdevelopment: 'simple-icons:gnome-devel',
+  apidevelopment: 'simple-icons:api-platform',
+  softwareengineering: 'simple-icons:gnome-devel',
+  frontenddevelopment: 'simple-icons:frontend-mentor',
+  backendoperations: 'simple-icons:serverless',
+  distributedsystems: 'simple-icons:gnome-netstatus-disconn',
+  linuxadministrationdebianubuntu: 'simple-icons:linux',
+  amazonwebservicesaws: 'simple-icons:amazonaws',
+  amazonec2: 'simple-icons:amazonec2',
+  amazons3: 'simple-icons:amazons3',
+  nginx: 'simple-icons:nginx',
+  secureshellssh: 'simple-icons:gnome-terminal',
+  memcached: 'simple-icons:memcached',
+  cryptocurrencysystems: 'simple-icons:bitcoin',
+  highavailabilityarchitecture: 'simple-icons:gnome-netstatus-disconn',
+  networkengineeringlanwanptp: 'simple-icons:gnome-netstatus-disconn',
+  materialdesign: 'simple-icons:materialdesign',
+  opticalcharacterrecognitionocr: 'simple-icons:gnome-searchtool',
+  securitytorpolipo: 'simple-icons:tor',
 };

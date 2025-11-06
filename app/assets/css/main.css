@@ -1,7 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 body {
-  @apply bg-dark text-light;
+  @apply bg-dark text-light font-roboto;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  @apply font-montserrat;
 }
