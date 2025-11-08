@@ -1,15 +1,27 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Recursive:wght@300..1000&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-body {
-  /* @apply bg-dark text-light font-roboto; */
+@plugin "daisyui" {
+  themes: light --default, dark, cmyk;
+}
+
+.font-recursive-extra {
+  font-family: "Recursive", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+  font-variation-settings:
+    "slnt" 0,
+    "CASL" 0,
+    "CRSV" 0.5,
+    "MONO" 0;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  @apply font-roboto;
+  @apply font-recursive-extra;
 }
 
 html,

@@ -1,18 +1,16 @@
 <template>
-  <footer class="bg-light py-6">
-    <div class="container mx-auto px-6 flex justify-between items-center">
-      <div>
-        <p class="text-dark">{{ footerContent.copyright }}</p>
-      </div>
-      <div>
-        <a :href="footerContent.links.github" target="_blank" rel="noopener noreferrer" class="text-dark mx-2">
-          <Icon name="simple-icons:github" size="24" />
-        </a>
-        <a :href="footerContent.links.linkedin" target="_blank" rel="noopener noreferrer" class="text-dark mx-2">
-          <Icon name="simple-icons:linkedin" size="24" />
-        </a>
-      </div>
-    </div>
+  <footer class="footer sm:footer-horizontal bg-base-300 text-base-content items-center p-6">
+    <aside class="grid-flow-col items-center">
+      <p>{{ footerContent.copyright }}</p>
+    </aside>
+    <nav class="grid-flow-col gap-4 md:place-self-center md:justify-self-end">
+      <a :href="footerContent.links.github" target="_blank" rel="noopener noreferrer" class="text-dark mx-2">
+        <Icon name="simple-icons:github" size="24" />
+      </a>
+      <a :href="footerContent.links.linkedin" target="_blank" rel="noopener noreferrer" class="text-dark mx-2">
+        <Icon name="simple-icons:linkedin" size="24" />
+      </a>
+    </nav>
   </footer>
 </template>
 

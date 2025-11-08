@@ -8,18 +8,23 @@ module.exports = {
     "./nuxt.config.{js,ts}",
     "./app/app.vue",
   ],
+
   theme: {
     extend: {
-      colors: {
-        primary: "#cbcbcb", // A brighter blue
-        light: "#f9f9f9", // A slightly darker off-white
-        dark: "#212529", // A darker gray
-      },
+      // colors: {
+      //   primary: "#cbcbcb",
+      //   light: "#f9f9f9",
+      //   dark: "#212529",
+      // },
       fontFamily: {
         roboto: ["Roboto", "sans-serif"],
         montserrat: ["Montserrat", "sans-serif"],
+        recursive: ["Recursive", "sans-serif"],
       },
     },
   },
-  plugins: [],
+  plugins: [require("daisyui")],
+  daisyui: {
+    themes: ['light']
+  }
 };
