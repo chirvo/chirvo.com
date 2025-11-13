@@ -57,7 +57,7 @@
 
 <script setup>
 import { ref, computed } from 'vue';
-import { content } from '~/lib/content_new_schema';
+import { content } from '~/lib/content';
 import { useLang } from '~/composables/useLang';
 
 const isOpen = ref(false);

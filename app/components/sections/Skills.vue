@@ -1,6 +1,7 @@
 <template>
   <section id="skills" class="py-20 bg-light">
-    <div class="container mx-auto px-6">
+    <div class="container mx-auto px-6 pattern-dots pattern-purple-500 pattern-bg-white 
+  pattern-size-6 pattern-opacity-20">
       <h2 class="text-3xl font-bold text-center mb-12">{{ competenciesContent.title }}</h2>
       <div class="grid md:grid-cols-3 gap-12">
         <div v-for="(pillar, index) in competenciesContentPillars" :key="index">
@@ -19,13 +20,12 @@
 
 <script setup>
 import { computed } from 'vue';
-import { content } from '~/lib/content_new_schema';
+import { content } from '~/lib/content';
 import { icons } from '~/lib/icons';
 import { useLang } from '~/composables/useLang';
 
 const { lang } = useLang();
 const competenciesContent = computed(() => content.static.competencies[lang.value]);
-console.log(JSON.stringify(content.static.competencies.en, null, 2));
 const competenciesContentPillars = computed(() => {
   return content.static.competencies.pillars.map((pillar) => {
     const langText = pillar[lang.value];
