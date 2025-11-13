@@ -11,11 +11,6 @@ module.exports = {
 
   theme: {
     extend: {
-      // colors: {
-      //   primary: "#cbcbcb",
-      //   light: "#f9f9f9",
-      //   dark: "#212529",
-      // },
       fontFamily: {
         roboto: ["Roboto", "sans-serif"],
         montserrat: ["Montserrat", "sans-serif"],
@@ -25,6 +20,6 @@ module.exports = {
   },
   plugins: [require("daisyui")],
   daisyui: {
-    themes: ['light']
-  }
+    themes: ["light", "dark", "nord"],
+  },
 };
