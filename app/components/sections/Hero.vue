@@ -1,6 +1,5 @@
 <template>
-  <section class="hero bg-base-200 min-h-screen pattern-diagonal-lines pattern-blue-500 pattern-bg-white 
-  pattern-size-6 pattern-opacity-20">
+  <section class="hero bg-base-200 min-h-screen">
     <div class="hero-content text-center">
       <div class="mx-auto px-6">
         <h1 class="text-4xl md:text-6xl font-semibold text-dark">{{ heroContent.name }}</h1>

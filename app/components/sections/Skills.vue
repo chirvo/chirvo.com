@@ -1,7 +1,6 @@
 <template>
   <section id="skills" class="py-20 bg-light">
-    <div class="container mx-auto px-6 pattern-dots pattern-purple-500 pattern-bg-white 
-  pattern-size-6 pattern-opacity-20">
+    <div class="container mx-auto px-6">
       <h2 class="text-3xl font-bold text-center mb-12">{{ competenciesContent.title }}</h2>
       <div class="grid md:grid-cols-3 gap-12">
         <div v-for="(pillar, index) in competenciesContentPillars" :key="index">
