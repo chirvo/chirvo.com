@@ -1,16 +1,26 @@
 <template>
-  <header class="bg-light sticky top-0 z-50">
+  <header class="bg-base-100 sticky top-0 z-50 lg:p-8">
     <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
       <div>
         <a href="#" class="text-dark font-bold text-xl">{{ heroContent.name }}</a>
       </div>
       <div class="hidden md:block">
         <ul class="flex items-center space-x-8">
-          <li><a href="#about" class="text-dark">About</a></li>
-          <li><a href="#skills" class="text-dark">Skills</a></li>
-          <li><a href="#projects" class="text-dark">Projects</a></li>
-          <li><a href="#experience" class="text-dark">Experience</a></li>
-          <li><a href="#contact" class="text-dark">Contact</a></li>
+          <li><a href="#about"
+              class="flex items-center gap-2 text-tertiary-800 no-underline hover:text-secondary-500 hover:no-underline hover:font-semibold">About</a>
+          </li>
+          <li><a href="#skills"
+              class="flex items-center gap-2 text-tertiary-800 no-underline hover:text-secondary-500 hover:no-underline hover:font-semibold">Skills</a>
+          </li>
+          <li><a href="#projects"
+              class="flex items-center gap-2 text-tertiary-800 no-underline hover:text-secondary-500 hover:no-underline hover:font-semibold">Projects</a>
+          </li>
+          <li><a href="#experience"
+              class="flex items-center gap-2 text-tertiary-800 no-underline hover:text-secondary-500 hover:no-underline hover:font-semibold">Experience</a>
+          </li>
+          <li><a href="#contact"
+              class="flex items-center gap-2 text-tertiary-800 no-underline hover:text-secondary-500 hover:no-underline hover:font-semibold">Contact</a>
+          </li>
           <li>
             <button @click="setLang('en')" class="text-dark" :class="{ 'font-bold': lang === 'en' }">EN</button>
             <span class="text-dark">/</span>
@@ -47,10 +57,10 @@
 
 <script setup>
 import { ref, computed } from 'vue';
-import { content } from '~/lib/content';
+import { content } from '~/lib/content_new_schema';
 import { useLang } from '~/composables/useLang';
 
 const isOpen = ref(false);
 const { lang, setLang } = useLang();
-const heroContent = computed(() => content[lang.value].hero);
+const heroContent = computed(() => content.static.hero[lang.value]);
 </script>

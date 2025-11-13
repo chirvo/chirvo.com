@@ -4,10 +4,10 @@
       <p>{{ footerContent.copyright }}</p>
     </aside>
     <nav class="grid-flow-col gap-4 md:place-self-center md:justify-self-end">
-      <a :href="footerContent.links.github" target="_blank" rel="noopener noreferrer" class="text-dark mx-2">
+      <a :href="footerLinks.github" target="_blank" rel="noopener noreferrer" class="text-dark mx-2">
         <Icon name="simple-icons:github" size="24" />
       </a>
-      <a :href="footerContent.links.linkedin" target="_blank" rel="noopener noreferrer" class="text-dark mx-2">
+      <a :href="footerLinks.linkedin" target="_blank" rel="noopener noreferrer" class="text-dark mx-2">
         <Icon name="simple-icons:linkedin" size="24" />
       </a>
     </nav>
@@ -16,9 +16,10 @@
 
 <script setup>
 import { computed } from 'vue';
-import { content } from '~/lib/content';
+import { content } from '~/lib/content_new_schema';
 import { useLang } from '~/composables/useLang';
 
 const { lang } = useLang();
-const footerContent = computed(() => content[lang.value].footer);
+const footerContent = computed(() => content.static.footer[lang.value]);
+const footerLinks = content.shared.links;
 </script>
