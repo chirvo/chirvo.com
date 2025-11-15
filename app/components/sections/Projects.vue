@@ -1,5 +1,5 @@
 <template>
-  <section id="projects" class="py-20">
+  <section id="projects" class="py-20 bg-base-200">
     <div class="container mx-auto px-6">
       <h2 class="text-3xl font-bold text-center mb-12">{{ projectsContent.title }}</h2>
       <div class="grid md:grid-cols-3 gap-8">

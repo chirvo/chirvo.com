@@ -1,23 +1,25 @@
 <template>
-  <section class="hero bg-base-200 min-h-screen">
-    <div class="hero-content text-center">
-      <div class="mx-auto px-6">
-        <h1 class="text-4xl md:text-6xl font-semibold text-dark">{{ heroContent.name }}</h1>
-        <h2 class="text-2xl md:text-3xl text-dark mt-4">{{ heroContent.title }}</h2>
-        <p class="text-lg md:text-xl text-dark mt-8 max-w-3xl mx-auto">{{ heroContent.pitch }}</p>
-        <div class="mt-8">
-          <a :href="heroLinks.github" target="_blank" rel="noopener noreferrer"
-            class="text-dark hover:text-primary mx-4">GitHub</a>
-          <a :href="heroLinks.linkedin" target="_blank" rel="noopener noreferrer"
-            class="text-dark hover:text-primary mx-4">LinkedIn</a>
-          <a :href="'mailto:' + heroLinks.email" class="text-dark hover:text-primary mx-4">Email</a>
+  <section class="hero bg-base-100 min-h-screen bg-pattern-diagonal">
+    <div class="hero-content text-left flex-col items-start">
+      <h1 class="text-2xl mb-10">{{ heroGreeting }}</h1>
+      <div class="carousel w-6xl">
+        <div div v-for="content, index in heroContent" :key="index" class="carousel-item w-6xl">
+          <div>
+            <h2 class="text-6xl font-semibold mb-10">{{ content.headline }}</h2>
+            <p class="text-2xl mb-10">{{ content.subheadline }}</p>
+            <div class="flex mt-10 gap-2 justify-center">
+              <a href="#projects" class="btn btn-primary">{{ content.cta.primary }}</a>
+              <a href="#contact" class="btn btn-secondary">{{ content.cta.secondary }}</a>
+            </div>
+          </div>
         </div>
-        <div class="flex mt-8 gap-2 justify-center">
-          <a href="#projects" class="btn btn-primary">{{
-            heroContent.cta.primary }}</a>
-          <a href="#contact" class="btn btn-secondary">{{
-            heroContent.cta.secondary }}</a>
-        </div>
+      </div>
+      <div class="flex gap-2 justify-center w-full">
+        <a :href="heroLinks.github" target="_blank" rel="noopener noreferrer"
+          class="text-dark hover:text-primary mx-4">GitHub</a>
+        <a :href="heroLinks.linkedin" target="_blank" rel="noopener noreferrer"
+          class="text-dark hover:text-primary mx-4">LinkedIn</a>
+        <a :href="'mailto:' + heroLinks.email" class="text-dark hover:text-primary mx-4">Email</a>
       </div>
     </div>
   </section>
@@ -30,6 +32,9 @@ import { content } from '~/lib/content';
 import { useLang } from '~/composables/useLang';
 
 const { lang } = useLang();
-const heroContent = computed(() => content.static.hero[lang.value]);
+//TODO: Maybe make rand computed()?
+const rand = Math.floor(Math.random() * 5);
+const heroGreeting = computed(() => content.static.hero.greeting[lang.value]);
+const heroContent = computed(() => content.static.hero.items[lang.value]);
 const heroLinks = content.shared.links;
 </script>

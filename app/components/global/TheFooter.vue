@@ -1,5 +1,5 @@
 <template>
-  <footer class="footer sm:footer-horizontal bg-base-300 text-base-content items-center p-6">
+  <footer class="footer sm:footer-horizontal bg-neutral text-neutral-content items-center p-6 lg:p-8">
     <aside class="grid-flow-col items-center">
       <p>{{ footerContent.copyright }}</p>
     </aside>

@@ -1,8 +1,8 @@
 <template>
-  <header class="bg-base-100 sticky top-0 z-50 lg:p-8">
+  <header class="bg-base-100 sticky top-0 z-50 lg:p-8 shadow-sm">
     <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
       <div>
-        <a href="#" class="text-dark font-bold text-xl">{{ heroContent.name }}</a>
+        <a href="#" class="text-dark font-bold text-xl">{{ fullName }}</a>
       </div>
       <div class="hidden md:block">
         <ul class="flex items-center space-x-8">
@@ -62,5 +62,6 @@ import { useLang } from '~/composables/useLang';
 
 const isOpen = ref(false);
 const { lang, setLang } = useLang();
-const heroContent = computed(() => content.static.hero[lang.value]);
+const { name } = content.shared;
+const fullName = `${name.first} ${name.middle[0]}. ${name.last} ${name.maiden[0]}.`
 </script>

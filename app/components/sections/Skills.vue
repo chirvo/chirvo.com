@@ -1,6 +1,6 @@
 <template>
-  <section id="skills" class="py-20 bg-light">
-    <div class="container mx-auto px-6">
+  <section id="skills" class="py-20 bg-pattern-dots">
+    <div class=" container mx-auto px-6">
       <h2 class="text-3xl font-bold text-center mb-12">{{ competenciesContent.title }}</h2>
       <div class="grid md:grid-cols-3 gap-12">
         <div v-for="(pillar, index) in competenciesContentPillars" :key="index">
@@ -16,6 +16,8 @@
     </div>
   </section>
 </template>
+<div className="min-h-screen w-full bg-[#f8fafc] relative">
+</div>
 
 <script setup>
 import { computed } from 'vue';

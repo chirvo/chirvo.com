@@ -6,37 +6,153 @@ export const content = {
    */
   static: {
     hero: {
-      en: {
-        name: "Irving A. Bermudez",
-        title: "Full-Stack Engineer | Linux Specialist | Senior Software Engineer",
-        pitch:
-          "A Senior Full Stack Engineer with over two decades of experience designing high-availability systems and delivering innovative, end-to-end solutions. I turn complex technical challenges into stable, scalable, and deployed realities.",
-        cta: {
-          primary: "View Projects",
-          secondary: "Contact Me",
-        },
+      greeting: {
+        en: "Hi, my name is Irving",
+        es: "Hola, me llamo Irving",
       },
-      es: {
-        name: "Irving A. Bermúdez S.",
-        title: "Ingeniero Full-Stack | Especialista en Linux | Ingeniero de Software Senior",
-        pitch:
-          "Un Ingeniero Full Stack Senior con más de dos décadas de experiencia diseñando sistemas de alta disponibilidad y entregando soluciones innovadoras, de extremo a extremo. Convierto desafíos técnicos complejos en realidades estables, escalables y desplegadas.",
-        cta: {
-          primary: "Ver Proyectos",
-          secondary: "Contáctame",
-        },
+      items: {
+        en: [
+          {
+            headline: "Build Your Vision, Faster",
+            subheadline:
+              "I help businesses create high-quality web applications, turning complex ideas into elegant, user-friendly solutions.",
+            cta: {
+              primary: "Let's Build Together",
+              secondary: "Contact Me",
+            },
+          },
+          {
+            headline: "Tired of Slow, Buggy Software?",
+            subheadline:
+              "I deliver robust and scalable code that performs. Let's build a product your users will love.",
+            cta: {
+              primary: "Upgrade Your Codebase",
+              secondary: "Contact Me",
+            },
+          },
+          {
+            headline: "Expert Full-Stack Development",
+            subheadline:
+              "From concept to deployment, I provide end-to-end development services to bring your digital products to life.",
+            cta: {
+              primary: "See My Work",
+              secondary: "Contact Me",
+            },
+          },
+          {
+            headline: "Your Startup's Next Technical Co-founder",
+            subheadline:
+              "I partner with early-stage startups to build foundational technology, ship features fast, and scale for growth.",
+            cta: {
+              primary: "Discuss Your Project",
+              secondary: "Contact Me",
+            },
+          },
+          {
+            headline: "From Idea to MVP in Record Time",
+            subheadline:
+              "Leverage my expertise in rapid prototyping and development to get your product to market before the competition.",
+            cta: {
+              primary: "Book a Free Consultation",
+              secondary: "Contact Me",
+            },
+          },
+          {
+            headline: "Senior Software Engineer",
+            subheadline:
+              "A Senior Full Stack Engineer with over two decades of experience designing high-availability systems and delivering innovative, end-to-end solutions. I turn complex technical challenges into stable, scalable, and deployed realities.",
+            cta: {
+              primary: "View Projects",
+              secondary: "Contact Me",
+            },
+          },
+          {
+            headline: "Your Digital Solutions Expert",
+            subheadline:
+              "I craft bespoke digital strategies and build powerful, scalable solutions to solve your most complex business challenges.",
+            cta: {
+              primary: "Solve My Problem",
+              secondary: "Learn More",
+            },
+          },
+        ],
+        es: [
+          {
+            headline: "Construye Tu Visión, Más Rápido.",
+            subheadline:
+              "Ayudo a las empresas a crear aplicaciones web de alta calidad, convirtiendo ideas complejas en soluciones elegantes y fáciles de usar.",
+            cta: {
+              primary: "Construyamos Juntos",
+              secondary: "Contáctame",
+            },
+          },
+          {
+            headline: "¿Cansado de Software Lento y con Errores?",
+            subheadline:
+              "Entrego código robusto y escalable que funciona. Construyamos un producto que a tus usuarios les encantará.",
+            cta: {
+              primary: "Actualiza Tu Código",
+              secondary: "Contáctame",
+            },
+          },
+          {
+            headline: "Desarrollo Full-Stack Experto",
+            subheadline:
+              "Desde el concepto hasta el despliegue, ofrezco servicios de desarrollo de extremo a extremo para dar vida a tus productos digitales.",
+            cta: {
+              primary: "Mira Mi Trabajo",
+              secondary: "Contáctame",
+            },
+          },
+          {
+            headline: "El Próximo Cofundador Técnico de Tu Startup",
+            subheadline:
+              "Me asocio con startups en etapa inicial para construir tecnología fundamental, lanzar funcionalidades rápidamente y escalar para el crecimiento.",
+            cta: {
+              primary: "Discute Tu Proyecto",
+              secondary: "Contáctame",
+            },
+          },
+          {
+            headline: "De la Idea al MVP en Tiempo Récord",
+            subheadline:
+              "Aprovecha mi experiencia en prototipado y desarrollo rápido para llevar tu producto al mercado antes que la competencia.",
+            cta: {
+              primary: "Reserva una Consulta Gratuita",
+              secondary: "Contáctame",
+            },
+          },
+          {
+            headline: "Ingeniero de Software Senior",
+            subheadline:
+              "Un Ingeniero Full Stack Senior con más de dos décadas de experiencia diseñando sistemas de alta disponibilidad y entregando soluciones innovadoras, de extremo a extremo. Convierto desafíos técnicos complejos en realidades estables, escalables y desplegadas.",
+            cta: {
+              primary: "Ver Proyectos",
+              secondary: "Contáctame",
+            },
+          },
+          {
+            headline: "Tu Experto en Soluciones Digitales",
+            subheadline:
+              "Creo estrategias digitales a medida y construyo soluciones potentes y escalables para resolver tus desafíos empresariales más complejos.",
+            cta: {
+              primary: "Resuelve Mi Problema",
+              secondary: "Saber Más",
+            },
+          },
+        ],
       },
     },
     about: {
       en: {
         title: "About Me",
         description:
-          "Hi. I'm Irving Bermudez.\n\nFor over 20 years, I've lived and breathed the full technology stack. My passion lies in solving complex problems, whether it's architecting a distributed system or optimizing back-end operations. I'm not just a developer; I'm an engineer who builds the complete solution, from the Linux server administration to the user's screen.\n\nMy career has been defined by a generalist approach and a strong entrepreneurial drive. I have co-founded technology companies, led critical infrastructure migrations from Windows to Linux, and designed complete web platforms from scratch. I am highly autonomous, adaptable, and thrive in dynamic, high-growth environments where I can deliver results quickly and efficiently.",
+          "Hi. I'm Irving Bermúdez.\n\nFor over 20 years, I've lived and breathed the full technology stack. My passion lies in solving complex problems, whether it's architecting a distributed system or optimizing back-end operations. I'm not just a developer; I'm an engineer who builds the complete solution, from the Linux server administration to the user's screen.\n\nMy career has been defined by a generalist approach and a strong entrepreneurial drive. I have co-founded technology companies, led critical infrastructure migrations from Windows to Linux, and designed complete web platforms from scratch. I am highly autonomous, adaptable, and thrive in dynamic, high-growth environments where I can deliver results quickly and efficiently.",
       },
       es: {
         title: "Sobre Mí",
         description:
-          "Hola. Soy Irving Bermudez.\n\nDurante más de 20 años, he vivido y respirado el stack tecnológico completo. Mi pasión radica en resolver problemas complejos, ya sea diseñando un sistema distribuido u optimizando operaciones de back-end. No soy solo un desarrollador; soy un ingeniero que construye la solución completa, desde la administración del servidor Linux hasta la pantalla del usuario.\n\nMi carrera se ha definido por un enfoque generalista y un fuerte impulso emprendedor. He cofundado empresas de tecnología, liderado migraciones de infraestructura críticas de Windows a Linux y diseñado plataformas web completas desde cero. Soy altamente autónomo, adaptable y prospero en entornos dinámicos y de alto crecimiento donde puedo entregar resultados de manera rápida y eficiente.",
+          "Hola. Soy Irving Bermúdez.\n\nDurante más de 20 años, he vivido y respirado el stack tecnológico completo. Mi pasión radica en resolver problemas complejos, ya sea diseñando un sistema distribuido u optimizando operaciones de back-end. No soy solo un desarrollador; soy un ingeniero que construye la solución completa, desde la administración del servidor Linux hasta la pantalla del usuario.\n\nMi carrera se ha definido por un enfoque generalista y un fuerte impulso emprendedor. He cofundado empresas de tecnología, liderado migraciones de infraestructura críticas de Windows a Linux y diseñado plataformas web completas desde cero. Soy altamente autónomo, adaptable y prospero en entornos dinámicos y de alto crecimiento donde puedo entregar resultados de manera rápida y eficiente.",
       },
     },
     competencies: {
@@ -143,10 +259,10 @@ export const content = {
     },
     footer: {
       en: {
-        copyright: "© 2025 Irving A. Bermudez",
+        copyright: "© 2025 Irving A. Bermúdez S. - All rights reserved.",
       },
       es: {
-        copyright: "© 2025 Irving A. Bermúdez S.",
+        copyright: "© 2025 Irving A. Bermúdez S. - Todos los derechos reservados.",
       },
     },
   },
@@ -162,6 +278,7 @@ export const content = {
       linkedin: "https://www.linkedin.com/in/irvingbermudez",
       github: "https://github.com/chirvo",
     },
+    name: { first: "Irving", middle: "Alexander", last: "Bermúdez", maiden: "Silva" },
     languages: [
       {
         en: { lang: "Spanish", level: "Native" },
