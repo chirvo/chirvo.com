@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="min-h-screen bg-base-100">
     <TheHeader />
     <main>
       <Hero />
@@ -32,11 +32,15 @@ useHead({
   title: 'Irving A. Bermúdez S. - Full-Stack Engineer & Systems Architect',
   htmlAttrs: {
     lang: computed(() => lang.value),
-    "data-theme": "nord",
-    style: "scroll-behavior: smooth;"
+    style: `scroll-behavior: smooth; direction: ltr;`
   },
   meta: [
-    { name: 'description', content: 'Personal portfolio website for Irving Bermudez, a Full-Stack Engineer and Systems Architect with over 20 years of experience.' }
+    { name: 'description', content: 'Personal portfolio website for Irving Bermudez, a Full-Stack Engineer and Systems Architect with over 20 years of experience.' },
+    { name: 'viewport', content: 'width=device-width, initial-scale=1, viewport-fit=hide' },
+    { property: 'og:title', content: 'Irving A. Bermúdez S. - Full-Stack Engineer & Systems Architect' },
+    { property: 'og:description', content: 'Personal portfolio website for Irving Bermudez, a Full-Stack Engineer and Systems Architect with over 20 years of experience.' },
+    { property: 'og:type', content: 'website' },
+    { property: 'twitter:card', content: 'summary_large_image' }
   ]
 });
 </script>

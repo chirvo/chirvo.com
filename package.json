@@ -11,19 +11,19 @@
   },
   "dependencies": {
     "@headlessui/vue": "^1.7.23",
-    "@tailwindcss/vite": "^4.1.17",
-    "nuxt": "^4.2.0",
-    "tailwindcss": "^4.1.17",
+    "@tailwindcss/vite": "^4.2.4",
+    "nuxt": "^4.4.4",
+    "tailwindcss": "^4.2.4",
     "vite-tsconfig-paths": "^5.1.4",
-    "vue": "^3.5.22",
-    "vue-router": "^4.6.3"
+    "vue": "^3.5.33",
+    "vue-router": "^4.6.4"
   },
   "devDependencies": {
-    "@iconify-json/simple-icons": "^1.2.57",
-    "@nuxt/icon": "^2.1.0",
-    "@nuxt/image": "^1.7.0",
+    "@iconify-json/simple-icons": "^1.2.80",
+    "@nuxt/icon": "^2.2.1",
+    "@nuxt/image": "^1.11.0",
     "@nuxtjs/tailwindcss": "^6.14.0",
-    "@types/node": "^24.10.0",
-    "daisyui": "^5.4.7"
+    "@types/node": "^24.12.2",
+    "daisyui": "^5.5.19"
   }
 }

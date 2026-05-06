@@ -1,17 +1,30 @@
 <template>
-  <div class="card bg-base-100 shadow-sm overflow-hidden">
-    <figure>
-      <img :src="project.image" :alt="project.title" />
+  <div class="card card-hover bg-base-200 overflow-hidden">
+    <!-- Image with gradient overlay -->
+    <figure class="relative h-48 overflow-hidden">
+      <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+      <img :src="project.image" :alt="project.title" 
+           class="relative w-full h-full object-cover transition-transform duration-500 hover:scale-110">
     </figure>
-    <div class="card-body">
-      <h2 class="card-title">{{ project.title }}</h2>
-      <p>{{ project.description }}</p>
-      <div class="card-actions justify-end">
-        <div v-for="tag in project.tags" :key="tag" class="badge badge-soft badge-primary">{{ tag }}</div>
+
+    <!-- Content -->
+    <div class="card-body p-6">
+      <h2 class="card-title text-gradient mb-3" style="font-size: 1.25rem;">{{ project.title }}</h2>
+      <p class="text-base-content-secondary mb-4 line-clamp-3">{{ project.description }}</p>
+
+      <!-- Tags -->
+      <div class="flex flex-wrap gap-2 mb-4">
+        <div v-for="(tag, index) in project.tags" :key="index"
+             class="badge badge-primary text-xs px-2 py-1">
+          {{ tag }}
+        </div>
       </div>
-      <div class="card-actions justify-end">
-        <button class="btn btn-primary">More</button>
-      </div>
+
+      <!-- CTA -->
+      <button @click="$router.push('#projects')" 
+              class="btn btn-primary w-full">
+        View Details
+      </button>
     </div>
   </div>
 </template>

@@ -1,53 +1,47 @@
 <template>
-  <header class="bg-base-100 sticky top-0 z-50 lg:p-8 shadow-sm">
-    <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
-      <div>
-        <a href="#" class="text-dark font-bold text-xl">{{ fullName }}</a>
-      </div>
-      <div class="hidden md:block">
-        <ul class="flex items-center space-x-8">
-          <li><a href="#about"
-              class="flex items-center gap-2 text-tertiary-800 no-underline hover:text-secondary-500 hover:no-underline hover:font-semibold">About</a>
-          </li>
-          <li><a href="#skills"
-              class="flex items-center gap-2 text-tertiary-800 no-underline hover:text-secondary-500 hover:no-underline hover:font-semibold">Skills</a>
-          </li>
-          <li><a href="#projects"
-              class="flex items-center gap-2 text-tertiary-800 no-underline hover:text-secondary-500 hover:no-underline hover:font-semibold">Projects</a>
-          </li>
-          <li><a href="#experience"
-              class="flex items-center gap-2 text-tertiary-800 no-underline hover:text-secondary-500 hover:no-underline hover:font-semibold">Experience</a>
-          </li>
-          <li><a href="#contact"
-              class="flex items-center gap-2 text-tertiary-800 no-underline hover:text-secondary-500 hover:no-underline hover:font-semibold">Contact</a>
-          </li>
-          <li>
-            <button @click="setLang('en')" class="text-dark" :class="{ 'font-bold': lang === 'en' }">EN</button>
-            <span class="text-dark">/</span>
-            <button @click="setLang('es')" class_="text-dark" :class="{ 'font-bold': lang === 'es' }">ES</button>
-          </li>
-        </ul>
-      </div>
-      <div class="md:hidden">
-        <button @click="isOpen = !isOpen" class="text-dark focus:outline-none">
-          <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-          </svg>
-        </button>
-      </div>
+  <header class="glass sticky top-0 z-50 shadow-lg">
+    <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+      <a href="#" class="text-gradient font-bold text-xl md:text-2xl">{{ fullName }}</a>
+
+      <!-- Desktop nav -->
+      <ul class="hidden md:flex items-center gap-8">
+        <li><router-link to="#about" class="font-semibold transition-colors duration-300 hover:text-primary">About</router-link></li>
+        <li><router-link to="#skills" class="font-semibold transition-colors duration-300 hover:text-primary">Skills</router-link></li>
+        <li><router-link to="#projects" class="font-semibold transition-colors duration-300 hover:text-primary">Projects</router-link></li>
+        <li><router-link to="#experience" class="font-semibold transition-colors duration-300 hover:text-primary">Experience</router-link></li>
+        <li><router-link to="#contact" class="font-semibold transition-colors duration-300 hover:text-primary">Contact</router-link></li>
+
+        <!-- Language toggle -->
+        <div class="flex items-center gap-2">
+          <button @click="setLang('en')" :class="{ 'font-bold text-primary': lang === 'en' }" class="transition-colors duration-300">EN</button>
+          <span class="text-base-content-secondary">/</span>
+          <button @click="setLang('es')" :class="{ 'font-bold text-primary': lang === 'es' }" class="transition-colors duration-300">ES</button>
+        </div>
+      </ul>
+
+      <!-- Mobile menu button -->
+      <button @click="isOpen = !isOpen" class="md:hidden text-base-content hover:text-primary transition-colors">
+        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+        </svg>
+      </button>
     </nav>
-    <div v-if="isOpen" class="md:hidden">
-      <ul class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-        <li><a href="#about" class="block text-dark px-3 py-2 rounded-md text-base font-medium">About</a></li>
-        <li><a href="#skills" class="block text-dark px-3 py-2 rounded-md text-base font-medium">Skills</a></li>
-        <li><a href="#projects" class="block text-dark px-3 py-2 rounded-md text-base font-medium">Projects</a></li>
-        <li><a href="#experience" class="block text-dark px-3 py-2 rounded-md text-base font-medium">Experience</a></li>
-        <li><a href="#contact" class="block text-dark px-3 py-2 rounded-md text-base font-medium">Contact</a></li>
-        <li>
-          <div class="flex justify-center">
-            <button @click="setLang('en')" class="text-dark" :class="{ 'font-bold': lang === 'en' }">EN</button>
-            <span class="text-dark mx-2">/</span>
-            <button @click="setLang('es')" class="text-dark" :class="{ 'font-bold': lang === 'es' }">ES</button>
+
+    <!-- Mobile menu -->
+    <div v-if="isOpen" class="md:hidden absolute top-full left-0 right-0 bg-base-200 shadow-xl border-t border-base-300">
+      <ul class="px-4 py-4 space-y-3">
+        <li><a href="#about" @click="toggleMenu" class="block py-2 text-base-content hover:text-primary transition-colors">About</a></li>
+        <li><a href="#skills" @click="toggleMenu" class="block py-2 text-base-content hover:text-primary transition-colors">Skills</a></li>
+        <li><a href="#projects" @click="toggleMenu" class="block py-2 text-base-content hover:text-primary transition-colors">Projects</a></li>
+        <li><a href="#experience" @click="toggleMenu" class="block py-2 text-base-content hover:text-primary transition-colors">Experience</a></li>
+        <li><a href="#contact" @click="toggleMenu" class="block py-2 text-base-content hover:text-primary transition-colors">Contact</a></li>
+
+        <!-- Language toggle -->
+        <li class="pt-4 border-t border-base-300">
+          <div class="flex items-center justify-center gap-2">
+            <button @click="setLang('en')" :class="{ 'font-bold text-primary': lang === 'en' }" class="transition-colors duration-300">EN</button>
+            <span class="text-base-content-secondary">/</span>
+            <button @click="setLang('es')" :class="{ 'font-bold text-primary': lang === 'es' }" class="transition-colors duration-300">ES</button>
           </div>
         </li>
       </ul>
@@ -63,5 +57,10 @@ import { useLang } from '~/composables/useLang';
 const isOpen = ref(false);
 const { lang, setLang } = useLang();
 const { name } = content.shared;
-const fullName = `${name.first} ${name.middle[0]}. ${name.last} ${name.maiden[0]}.`
+const fullName = `${name.first} ${name.middle[0]}. ${name.last} ${name.maiden[0]}.`;
+
+// Toggle mobile menu
+function toggleMenu() {
+  isOpen.value = !isOpen.value;
+}
 </script>

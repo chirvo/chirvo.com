@@ -1,14 +1,27 @@
 <template>
-  <section id="skills" class="py-20 bg-pattern-dots">
-    <div class=" container mx-auto px-6">
-      <h2 class="text-3xl font-bold text-center mb-12">{{ competenciesContent.title }}</h2>
-      <div class="grid md:grid-cols-3 gap-12">
-        <div v-for="(pillar, index) in competenciesContentPillars" :key="index">
-          <h3 class="text-2xl font-bold text-center mb-6">{{ pillar.title }}</h3>
-          <div class="flex flex-wrap justify-center">
-            <div v-for="(skill, index) in pillar.skills" :key="index" class="badge badge-soft badge-primary m-2">
-              <Icon :name="getIcon(skill)" class="mr-2" />
-              <span>{{ skill }}</span>
+  <section id="skills" class="py-24 bg-gradient-hero relative overflow-hidden">
+    <!-- Background elements -->
+    <div class="absolute inset-0 bg-grid-pattern opacity-20"></div>
+    <div class="bg-glow-orb" style="top: 10%; left: 20%;"></div>
+    <div class="bg-glow-orb" style="bottom: 15%; right: 20%; background: radial-gradient(circle, rgba(236, 72, 153, 0.1) 0%, transparent 70%);"></div>
+
+    <div class="container mx-auto px-6 relative z-10">
+      <!-- Section header -->
+      <div class="text-center mb-16 animate-slide-up">
+        <h2 class="section-title text-gradient">{{ competenciesContent.title }}</h2>
+        <p class="section-subtitle"></p>
+      </div>
+
+      <!-- Skills pillars -->
+      <div class="grid md:grid-cols-3 gap-8">
+        <div v-for="(pillar, index) in competenciesContentPillars" :key="index"
+          class="card card-hover glass">
+          <h3 class="text-gradient text-center mb-8 font-display text-2xl">{{ pillar.title }}</h3>
+          <div class="flex flex-wrap gap-2 justify-center">
+            <div v-for="(skill, sIndex) in pillar.skills" :key="sIndex"
+              class="badge badge-primary glow-effect hover:scale-110 transition-transform duration-300">
+              <Icon :name="getIcon(skill)" />
+              <span class="ml-2 text-xs md:text-sm">{{ skill }}</span>
             </div>
           </div>
         </div>
