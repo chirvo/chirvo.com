@@ -1,15 +1,12 @@
 <template>
-  <section id="projects" class="py-24 bg-base-100 relative overflow-hidden">
-    <!-- Background elements -->
-    <div class="absolute inset-0 bg-grid-pattern opacity-20"></div>
-    <div class="bg-glow-orb" style="top: 5%; left: 10%;"></div>
-    <div class="bg-glow-orb" style="bottom: 10%; right: 10%; background: radial-gradient(circle, rgba(236, 72, 153, 0.1) 0%, transparent 70%);"></div>
+  <section id="projects" class="py-24 md:py-32 bg-base-100 relative overflow-hidden">
+    <div class="bg-glow-orb" style="top: 10%; left: 15%;"></div>
 
     <div class="container mx-auto px-6 relative z-10">
       <!-- Section header -->
-      <div class="text-center mb-16 animate-slide-up">
-        <h2 class="section-title text-gradient">{{ projectsContent.title }}</h2>
-        <p class="section-subtitle"></p>
+      <div class="text-center mb-16 md:mb-20 animate-slide-up">
+        <h2 class="section-title">{{ projectsContent.title }}</h2>
+        <div class="divider-gold w-24 mx-auto mt-6"></div>
       </div>
 
       <!-- Projects grid -->

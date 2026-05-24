@@ -1,28 +1,28 @@
 <template>
   <div class="card card-hover bg-base-200 overflow-hidden">
-    <!-- Image with gradient overlay -->
+    <!-- Image -->
     <figure class="relative h-48 overflow-hidden">
-      <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
       <img :src="project.image" :alt="project.title" 
-           class="relative w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+           class="w-full h-full object-cover transition-transform duration-500 hover:scale-105">
+      <div class="absolute inset-0 bg-gradient-to-t from-base-200/80 to-transparent"></div>
     </figure>
 
     <!-- Content -->
-    <div class="card-body p-6">
-      <h2 class="card-title text-gradient mb-3" style="font-size: 1.25rem;">{{ project.title }}</h2>
-      <p class="text-base-content-secondary mb-4 line-clamp-3">{{ project.description }}</p>
+    <div class="p-6">
+      <h2 class="font-display text-xl text-base-content mb-3 font-medium">{{ project.title }}</h2>
+      <p class="text-base-content-secondary mb-5 line-clamp-3 text-sm leading-relaxed">{{ project.description }}</p>
 
       <!-- Tags -->
-      <div class="flex flex-wrap gap-2 mb-4">
+      <div class="flex flex-wrap gap-2 mb-5">
         <div v-for="(tag, index) in project.tags" :key="index"
-             class="badge badge-primary text-xs px-2 py-1">
+             class="badge badge-primary">
           {{ tag }}
         </div>
       </div>
 
       <!-- CTA -->
       <button @click="$router.push('#projects')" 
-              class="btn btn-primary w-full">
+              class="btn btn-primary w-full text-sm">
         View Details
       </button>
     </div>

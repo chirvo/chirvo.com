@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-base-100">
+  <div class="min-h-screen bg-base-100 flex flex-col">
     <TheHeader />
     <main>
       <Hero />
