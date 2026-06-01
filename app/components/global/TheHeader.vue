@@ -5,11 +5,11 @@
 
       <!-- Desktop nav -->
       <ul class="hidden md:flex items-center gap-8">
-        <li><router-link to="#about" class="text-base-content-secondary hover:text-primary transition-colors duration-200 text-sm uppercase tracking-wider font-medium">About</router-link></li>
-        <li><router-link to="#skills" class="text-base-content-secondary hover:text-primary transition-colors duration-200 text-sm uppercase tracking-wider font-medium">Skills</router-link></li>
-        <li><router-link to="#projects" class="text-base-content-secondary hover:text-primary transition-colors duration-200 text-sm uppercase tracking-wider font-medium">Projects</router-link></li>
-        <li><router-link to="#experience" class="text-base-content-secondary hover:text-primary transition-colors duration-200 text-sm uppercase tracking-wider font-medium">Experience</router-link></li>
-        <li><router-link to="#contact" class="text-base-content-secondary hover:text-primary transition-colors duration-200 text-sm uppercase tracking-wider font-medium">Contact</router-link></li>
+        <li><a href="#about" class="text-base-content-secondary hover:text-primary transition-colors duration-200 text-sm uppercase tracking-wider font-medium">About</a></li>
+        <li><a href="#skills" class="text-base-content-secondary hover:text-primary transition-colors duration-200 text-sm uppercase tracking-wider font-medium">Skills</a></li>
+        <li><a href="#projects" class="text-base-content-secondary hover:text-primary transition-colors duration-200 text-sm uppercase tracking-wider font-medium">Projects</a></li>
+        <li><a href="#experience" class="text-base-content-secondary hover:text-primary transition-colors duration-200 text-sm uppercase tracking-wider font-medium">Experience</a></li>
+        <li><a href="#contact" class="text-base-content-secondary hover:text-primary transition-colors duration-200 text-sm uppercase tracking-wider font-medium">Contact</a></li>
 
         <!-- Language toggle -->
         <div class="flex items-center gap-2 ml-4 pl-4 border-l border-base-400">
