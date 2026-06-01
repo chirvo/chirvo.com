@@ -4,6 +4,7 @@ import { dirname, join } from "path";
 import tailwindcss from "@tailwindcss/vite";
 
 export default defineNuxtConfig({
+  ssr: false,
   compatibilityDate: "2025-07-15",
   devtools: { enabled: true },
   modules: ["@nuxt/icon", "@nuxt/image"],
