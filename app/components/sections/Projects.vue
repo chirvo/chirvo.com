@@ -24,7 +24,7 @@
 </template>
 
 <script setup>
-import { computed, ref } from 'vue';
+import { computed, ref, onMounted } from 'vue';
 import { content } from '~/lib/content';
 import ProjectCard from '~/components/ProjectCard.vue';
 import { useLang } from '~/composables/useLang';
@@ -43,6 +43,9 @@ const projectsContentItems = computed(() => {
 
 const sectionRef = ref(null);
 const { observe } = useSectionReveal({ threshold: 0.1 });
-if (sectionRef.value) observe(sectionRef.value);
+
+onMounted(() => {
+  if (sectionRef.value) observe(sectionRef.value);
+});
 useParallaxOrbs();
 </script>

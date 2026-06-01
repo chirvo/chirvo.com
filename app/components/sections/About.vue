@@ -42,7 +42,7 @@
 </template>
 
 <script setup>
-import { computed, ref } from 'vue';
+import { computed, ref, onMounted } from 'vue';
 import { content } from '~/lib/content';
 import { useLang } from '~/composables/useLang';
 import { useSectionReveal } from '~/composables/useScrollReveal';
@@ -55,7 +55,10 @@ useParallaxOrbs();
 // Observe section container to reveal all children
 const sectionRef = ref(null);
 const { observe } = useSectionReveal({ threshold: 0.1 });
-if (sectionRef.value) observe(sectionRef.value);
+
+onMounted(() => {
+  if (sectionRef.value) observe(sectionRef.value);
+});
 
 // Animated counters
 const counters = ref([
@@ -107,7 +110,9 @@ const statsObserver = new IntersectionObserver((entries) => {
   }
 }, { threshold: 0.3 });
 
-if (statsRef.value) {
-  statsObserver.observe(statsRef.value);
-}
+onMounted(() => {
+  if (statsRef.value) {
+    statsObserver.observe(statsRef.value);
+  }
+});
 </script>

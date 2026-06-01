@@ -30,7 +30,7 @@
 </template>
 
 <script setup>
-import { computed, ref } from 'vue';
+import { computed, ref, onMounted } from 'vue';
 import { content } from '~/lib/content';
 import { icons } from '~/lib/icons';
 import { useLang } from '~/composables/useLang';
@@ -53,6 +53,9 @@ const getIcon = (skill) => {
 
 const sectionRef = ref(null);
 const { observe } = useSectionReveal({ threshold: 0.1 });
-if (sectionRef.value) observe(sectionRef.value);
+
+onMounted(() => {
+  if (sectionRef.value) observe(sectionRef.value);
+});
 useParallaxOrbs();
 </script>

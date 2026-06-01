@@ -43,7 +43,7 @@
 </template>
 
 <script setup>
-import { computed, ref } from 'vue';
+import { computed, ref, onMounted } from 'vue';
 import { content } from '~/lib/content';
 import { useLang } from '~/composables/useLang';
 import { useSectionReveal } from '~/composables/useScrollReveal';
@@ -68,6 +68,9 @@ const experienceContentEducation = computed(() => {
 
 const sectionRef = ref(null);
 const { observe } = useSectionReveal({ threshold: 0.1 });
-if (sectionRef.value) observe(sectionRef.value);
+
+onMounted(() => {
+  if (sectionRef.value) observe(sectionRef.value);
+});
 useParallaxOrbs();
 </script>
