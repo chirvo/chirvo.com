@@ -17,9 +17,9 @@
           <span ref="typedTextRef"></span><span class="cursor-blink">|</span>
         </h1>
 
-        <!-- Subheadline with typewriter -->
+        <!-- Subheadline -->
         <p ref="subRef" class="text-base md:text-lg text-base-content-secondary leading-relaxed min-h-[1.5em]">
-          <span ref="typedSubRef"></span><span class="cursor-blink">|</span>
+          <span ref="subTextRef" class="sub-fade"></span>
         </p>
 
         <!-- CTA buttons -->
@@ -76,8 +76,7 @@ const heroLinks = content.shared.links;
 
 // Typewriter state
 const typedTextRef = ref(null);
-const typedSubRef = ref(null);
-const headlineRef = ref(null);
+const subTextRef = ref(null);
 const subRef = ref(null);
 const ctaRef = ref(null);
 const socialRef = ref(null);
@@ -127,14 +126,22 @@ function startTypewriterForSlide(slideIndex) {
 
   // Reset refs
   if (typedTextRef.value) typedTextRef.value.textContent = '';
-  if (typedSubRef.value) typedSubRef.value.textContent = '';
+  if (subTextRef.value) {
+    subTextRef.value.textContent = '';
+    subTextRef.value.classList.remove('sub-visible');
+  }
 
   // Phase 1: Type headline
   typewrite(typedTextRef.value, item.headline, 45, () => {
-    // Pause after headline, then type subheadline
+    // Phase 2: Fade-in subheadline (not typewriter)
     typewriterTimer = setTimeout(() => {
-      typewrite(typedSubRef.value, item.subheadline, 25, () => {
-        // After typing completes, show CTA + socials + indicators
+      if (subTextRef.value) {
+        subTextRef.value.textContent = item.subheadline;
+        subTextRef.value.classList.add('sub-visible');
+      }
+
+      // After subheadline fades in, show CTA + socials + indicators
+      typewriterTimer = setTimeout(() => {
         if (ctaRef.value) ctaRef.value.classList.remove('opacity-0');
         if (socialRef.value) socialRef.value.classList.remove('opacity-0');
         if (indicatorsRef.value) indicatorsRef.value.classList.remove('opacity-0');
@@ -143,7 +150,7 @@ function startTypewriterForSlide(slideIndex) {
         carouselTimer = setTimeout(() => {
           advanceSlide();
         }, 6000);
-      });
+      }, 500);
     }, 800);
   });
 }
@@ -163,6 +170,10 @@ function advanceSlide() {
 
   // Start new typewriter sequence
   typewriterTimer = setTimeout(() => {
+    // Fade out subheadline before switching
+    if (subTextRef.value) {
+      subTextRef.value.classList.remove('sub-visible');
+    }
     startTypewriterForSlide(nextSlide);
   }, 400);
 }
@@ -183,7 +194,12 @@ function goToSlide(index) {
 }
 
 onMounted(() => {
-  startTypewriterForSlide(0);
+  // Allow layout to settle before starting
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      startTypewriterForSlide(0);
+    });
+  });
 });
 
 onUnmounted(() => {
@@ -202,5 +218,17 @@ onUnmounted(() => {
 @keyframes blink {
   0%, 100% { opacity: 1; }
   50% { opacity: 0; }
+}
+
+/* Subheadline fade-in — subtle, professional */
+.sub-fade {
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.sub-fade.sub-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 </style>
