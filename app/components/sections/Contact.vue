@@ -1,16 +1,16 @@
 <template>
-  <section id="contact" class="py-24 md:py-32 bg-base-100 relative overflow-hidden">
+  <section id="contact" ref="sectionRef" class="py-24 md:py-32 bg-base-100 relative overflow-hidden">
     <div class="bg-glow-orb" data-parallax-orb="0.03" style="top: 10%; left: 25%;"></div>
 
     <div class="container mx-auto px-6 relative z-10">
       <!-- Section header -->
-      <div ref="headerRef" class="text-center mb-16 md:mb-20 reveal-slow">
+      <div class="text-center mb-16 md:mb-20 reveal-slow">
         <h2 class="section-title">{{ contactContent.title }}</h2>
         <div class="divider-gold w-24 mx-auto mt-6"></div>
       </div>
 
       <!-- Contact info -->
-      <div ref="contentRef" class="max-w-xl mx-auto text-center reveal-slow">
+      <div class="max-w-xl mx-auto text-center reveal-slow">
         <p class="text-base md:text-lg leading-relaxed text-base-content-secondary mb-10">{{ contactContent.description }}</p>
         <a :href="'mailto:' + contactEmail"
            class="inline-flex items-center gap-3 px-8 py-4 bg-primary hover:bg-primary-hover transition-all duration-200 text-base-100 font-medium tracking-wide hover:shadow-lg hover:shadow-primary/20 hover:-translate-y-0.5">
@@ -28,14 +28,15 @@
 import { computed, ref } from 'vue';
 import { content } from '~/lib/content';
 import { useLang } from '~/composables/useLang';
-import { useRevealElement } from '~/composables/useScrollReveal';
+import { useSectionReveal } from '~/composables/useScrollReveal';
 import { useParallaxOrbs } from '~/composables/useParallaxOrbs';
 
 const { lang } = useLang();
 const contactContent = computed(() => content.static.contact[lang.value]);
 const contactEmail = content.shared.links.email;
 
-const headerRef = useRevealElement({ threshold: 0.2 });
-const contentRef = useRevealElement({ threshold: 0.2 });
+const sectionRef = ref(null);
+const { observe } = useSectionReveal({ threshold: 0.1 });
+if (sectionRef.value) observe(sectionRef.value);
 useParallaxOrbs();
 </script>

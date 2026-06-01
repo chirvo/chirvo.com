@@ -1,17 +1,17 @@
 <template>
-  <section id="about" class="py-24 md:py-32 bg-base-100 relative overflow-hidden">
+  <section id="about" ref="sectionRef" class="py-24 md:py-32 bg-base-100 relative overflow-hidden">
     <div class="bg-glow-orb" data-parallax-orb="0.03" style="top: 10%; left: 10%;"></div>
 
     <div class="container mx-auto px-6 relative z-10 flex flex-col items-center">
       <!-- Section header -->
-      <div ref="headerRef" class="text-center mb-16 md:mb-20 reveal-slow">
+      <div class="text-center mb-16 md:mb-20 reveal-slow">
         <h2 class="section-title">{{ aboutContent.title }}</h2>
         <div class="divider-gold w-24 mx-auto mt-6"></div>
       </div>
 
       <div class="flex flex-col md:flex-row items-center gap-12 md:gap-16 max-w-5xl">
         <!-- Image -->
-        <div ref="imageRef" class="flex-shrink-0 reveal-slow">
+        <div class="flex-shrink-0 reveal-slow">
           <div class="relative">
             <img src="https://placehold.co/400" alt="Irving Bermúdez"
                  class="w-48 h-48 md:w-64 md:h-64 object-cover border-2 border-base-300 rounded-sm"
@@ -21,7 +21,7 @@
         </div>
 
         <!-- Content -->
-        <div ref="contentRef" class="flex-1 reveal-slow">
+        <div class="flex-1 reveal-slow">
           <p class="text-base md:text-lg leading-relaxed whitespace-pre-line text-base-content-secondary">
             {{ aboutContent.description }}
           </p>
@@ -29,7 +29,7 @@
       </div>
 
       <!-- Stats row -->
-      <div ref="statsRef" class="mt-16 md:mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 max-w-3xl">
+      <div ref="statsRef" class="mt-16 md:mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 max-w-3xl reveal-slow">
         <div v-for="stat in stats" :key="stat.label" class="text-center">
           <div class="font-display text-3xl md:text-4xl text-primary font-light mb-1">
             {{ stat.prefix }}{{ stat.value }}{{ stat.suffix }}
@@ -45,17 +45,17 @@
 import { computed, ref } from 'vue';
 import { content } from '~/lib/content';
 import { useLang } from '~/composables/useLang';
-import { useRevealElement } from '~/composables/useScrollReveal';
+import { useSectionReveal } from '~/composables/useScrollReveal';
 import { useParallaxOrbs } from '~/composables/useParallaxOrbs';
 
 const { lang } = useLang();
 const aboutContent = computed(() => content.static.about[lang.value]);
 useParallaxOrbs();
 
-const headerRef = useRevealElement({ threshold: 0.2 });
-const imageRef = useRevealElement({ threshold: 0.2 });
-const contentRef = useRevealElement({ threshold: 0.2 });
-const statsRef = ref(null);
+// Observe section container to reveal all children
+const sectionRef = ref(null);
+const { observe } = useSectionReveal({ threshold: 0.1 });
+if (sectionRef.value) observe(sectionRef.value);
 
 // Animated counters
 const counters = ref([
@@ -80,7 +80,6 @@ const stats = computed(() => {
   }));
 });
 
-// Start counters when stats become visible
 function animateCounters() {
   if (counterStart) return;
   counterStart = true;
@@ -90,7 +89,6 @@ function animateCounters() {
     const animate = (now) => {
       const elapsed = now - startTime;
       const progress = Math.min(elapsed / c.duration, 1);
-      // Ease out cubic
       const eased = 1 - Math.pow(1 - progress, 3);
       c.value = Math.round(eased * c.target);
       if (progress < 1) requestAnimationFrame(animate);
@@ -99,7 +97,7 @@ function animateCounters() {
   });
 }
 
-// Observe stats section
+const statsRef = ref(null);
 const statsObserver = new IntersectionObserver((entries) => {
   for (const entry of entries) {
     if (entry.isIntersecting) {

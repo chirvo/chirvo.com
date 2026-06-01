@@ -1,10 +1,10 @@
 <template>
-  <section id="experience" class="py-24 md:py-32 bg-base-200 relative overflow-hidden">
+  <section id="experience" ref="sectionRef" class="py-24 md:py-32 bg-base-200 relative overflow-hidden">
     <div class="bg-glow-orb" data-parallax-orb="0.04" style="top: 15%; left: 20%;"></div>
 
     <div class="container mx-auto px-6 relative z-10">
       <!-- Section header -->
-      <div ref="headerRef" class="text-center mb-16 md:mb-20 reveal-slow">
+      <div class="text-center mb-16 md:mb-20 reveal-slow">
         <h2 class="section-title">{{ experiencePageTitle.title }}</h2>
         <div class="divider-gold w-24 mx-auto mt-6"></div>
       </div>
@@ -43,10 +43,10 @@
 </template>
 
 <script setup>
-import { computed, ref, onMounted, onUnmounted } from 'vue';
+import { computed, ref } from 'vue';
 import { content } from '~/lib/content';
 import { useLang } from '~/composables/useLang';
-import { useRevealElement } from '~/composables/useScrollReveal';
+import { useSectionReveal } from '~/composables/useScrollReveal';
 import { useParallaxOrbs } from '~/composables/useParallaxOrbs';
 
 const { lang } = useLang();
@@ -66,52 +66,8 @@ const experienceContentEducation = computed(() => {
   });
 });
 
-const headerRef = useRevealElement({ threshold: 0.2 });
-const timelineRef = ref(null);
+const sectionRef = ref(null);
+const { observe } = useSectionReveal({ threshold: 0.1 });
+if (sectionRef.value) observe(sectionRef.value);
 useParallaxOrbs();
-
-// Timeline draw-on-scroll effect
-let timelineObserver = null;
-
-function initTimelineDraw() {
-  if (!timelineRef.value) return;
-  const items = timelineRef.value.querySelectorAll('.timeline-item');
-  if (!items.length) return;
-
-  // Find the last ::after line element and animate its height
-  const lastLine = timelineRef.value.querySelector('.timeline-item:last-child::after');
-  if (!lastLine) return;
-
-  timelineObserver = new IntersectionObserver((entries) => {
-    for (const entry of entries) {
-      if (entry.isIntersecting) {
-        // Draw the line progressively
-        const timeline = timelineRef.value;
-        const rect = timeline.getBoundingClientRect();
-        const windowHeight = window.innerHeight;
-
-        function updateLineHeight() {
-          const scrolled = Math.min(Math.max((windowHeight - rect.top) / (rect.height + windowHeight), 0), 1);
-          const lines = timeline.querySelectorAll('.timeline-item::after');
-          // Use a container line approach
-          timeline.style.setProperty('--line-height', `${scrolled * 100}%`);
-          if (scrolled < 1) requestAnimationFrame(updateLineHeight);
-        }
-
-        requestAnimationFrame(updateLineHeight);
-        timelineObserver.disconnect();
-      }
-    }
-  }, { threshold: [0, 0.25, 0.5, 0.75, 1] });
-
-  timelineObserver.observe(timelineRef.value);
-}
-
-onMounted(() => {
-  initTimelineDraw();
-});
-
-onUnmounted(() => {
-  if (timelineObserver) timelineObserver.disconnect();
-});
 </script>

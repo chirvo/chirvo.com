@@ -2,8 +2,6 @@ import { ref, onMounted, onUnmounted } from 'vue';
 
 /**
  * Composable that triggers CSS animations when elements enter viewport.
- * Usage: const { observe, target } = useScrollReveal({ threshold: 0.15 });
- * Then bind target.value to the element and add a reveal class.
  */
 export function useScrollReveal(options = {}) {
   const {
@@ -57,4 +55,39 @@ export function useRevealElement(options = {}) {
   });
 
   return target;
+}
+
+/**
+ * Composable that reveals all children with 'reveal-slow' class
+ * when the section container enters the viewport.
+ * Usage: const target = useSectionReveal(); // then bind target to section container
+ */
+export function useSectionReveal(options = {}) {
+  const {
+    threshold = 0.1,
+    rootMargin = '0px 0px -40px 0px',
+  } = options;
+
+  const observer = new IntersectionObserver((entries) => {
+    for (const entry of entries) {
+      if (entry.isIntersecting) {
+        // Reveal all children with reveal-slow class
+        const children = entry.target.querySelectorAll('.reveal-slow');
+        children.forEach((child) => {
+          child.classList.add('reveal-active');
+        });
+        observer.unobserve(entry.target);
+      }
+    }
+  }, { threshold, rootMargin });
+
+  function observe(el) {
+    if (el) observer.observe(el);
+  }
+
+  onUnmounted(() => {
+    observer.disconnect();
+  });
+
+  return { observe };
 }

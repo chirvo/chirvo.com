@@ -1,10 +1,10 @@
 <template>
-  <section id="projects" class="py-24 md:py-32 bg-base-100 relative overflow-hidden">
+  <section id="projects" ref="sectionRef" class="py-24 md:py-32 bg-base-100 relative overflow-hidden">
     <div class="bg-glow-orb" data-parallax-orb="0.03" style="top: 10%; left: 15%;"></div>
 
     <div class="container mx-auto px-6 relative z-10">
       <!-- Section header -->
-      <div ref="headerRef" class="text-center mb-16 md:mb-20 reveal-slow">
+      <div class="text-center mb-16 md:mb-20 reveal-slow">
         <h2 class="section-title">{{ projectsContent.title }}</h2>
         <div class="divider-gold w-24 mx-auto mt-6"></div>
       </div>
@@ -28,7 +28,7 @@ import { computed, ref } from 'vue';
 import { content } from '~/lib/content';
 import ProjectCard from '~/components/ProjectCard.vue';
 import { useLang } from '~/composables/useLang';
-import { useRevealElement } from '~/composables/useScrollReveal';
+import { useSectionReveal } from '~/composables/useScrollReveal';
 import { useParallaxOrbs } from '~/composables/useParallaxOrbs';
 
 const { lang } = useLang();
@@ -41,6 +41,8 @@ const projectsContentItems = computed(() => {
   });
 });
 
-const headerRef = useRevealElement({ threshold: 0.2 });
+const sectionRef = ref(null);
+const { observe } = useSectionReveal({ threshold: 0.1 });
+if (sectionRef.value) observe(sectionRef.value);
 useParallaxOrbs();
 </script>
