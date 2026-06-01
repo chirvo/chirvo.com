@@ -171,6 +171,33 @@
     to { opacity: 1; transform: translateY(0); }
   }
 
+  /* Scroll-triggered reveal — fade + slide */
+  .reveal-slow {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .reveal-active.reveal-slow,
+  .reveal-slow.reveal-active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Staggered items — hidden until parent reveals */
+  .stagger-item {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+
+  .stagger-active.stagger-item,
+  .stagger-item.stagger-active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
   /* Background patterns — warm grid */
   .bg-grid-pattern {
     background-image: 
@@ -216,6 +243,23 @@
     background: var(--color-primary-hover);
   }
 
+  /* Scroll progress bar */
+  .scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    z-index: 100;
+    pointer-events: none;
+  }
+
+  .scroll-progress-fill {
+    height: 100%;
+    background: var(--gradient-primary);
+    transition: width 0.15s ease-out;
+  }
+
   /* Warm glass effect */
   .glass {
     background: rgba(250, 246, 240, 0.85);
@@ -249,6 +293,11 @@
     height: 8px;
     background: var(--color-primary);
     border-radius: 50%;
+    transition: transform 0.3s ease;
+  }
+
+  .timeline-item.reveal-active::before {
+    transform: scale(1.3);
   }
 
   .timeline-item::after {
@@ -259,6 +308,11 @@
     width: 2px;
     height: calc(100% - 1rem);
     background: var(--color-base-400);
+    transition: background 0.3s ease;
+  }
+
+  .timeline-item.reveal-active::after {
+    background: var(--color-primary);
   }
 
   .timeline-item:last-child::after {

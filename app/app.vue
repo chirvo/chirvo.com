@@ -1,6 +1,14 @@
 <template>
   <div class="min-h-screen bg-base-100 flex flex-col">
-    <TheHeader />
+    <!-- Scroll progress bar -->
+    <div class="fixed top-0 left-0 right-0 h-[2px] z-[100]">
+      <div
+        class="h-full bg-gradient-primary transition-all duration-150 ease-out"
+        :style="{ width: `${scrollProgress}%` }"
+      />
+    </div>
+
+    <TheHeader :section-ids="sectionIds" />
     <main>
       <Hero />
       <About />
@@ -16,6 +24,7 @@
 <script setup>
 import { useHead } from '#app';
 import { computed } from 'vue';
+import { ref } from 'vue';
 import TheHeader from '~/components/global/TheHeader.vue';
 import TheFooter from '~/components/global/TheFooter.vue';
 import Hero from '~/components/sections/Hero.vue';
@@ -25,8 +34,12 @@ import Projects from '~/components/sections/Projects.vue';
 import Experience from '~/components/sections/Experience.vue';
 import Contact from '~/components/sections/Contact.vue';
 import { useLang } from '~/composables/useLang';
+import { useScrollProgress } from '~/composables/useScrollProgress';
 
 const { lang } = useLang();
+
+const sectionIds = ['about', 'skills', 'projects', 'experience', 'contact'];
+const { progress: scrollProgress } = useScrollProgress(sectionIds);
 
 useHead({
   title: 'Irving A. Bermúdez S. - Full-Stack Engineer & Systems Architect',

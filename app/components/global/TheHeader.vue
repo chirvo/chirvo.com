@@ -5,11 +5,19 @@
 
       <!-- Desktop nav -->
       <ul class="hidden md:flex items-center gap-8">
-        <li><a href="#about" class="text-base-content-secondary hover:text-primary transition-colors duration-200 text-sm uppercase tracking-wider font-medium">About</a></li>
-        <li><a href="#skills" class="text-base-content-secondary hover:text-primary transition-colors duration-200 text-sm uppercase tracking-wider font-medium">Skills</a></li>
-        <li><a href="#projects" class="text-base-content-secondary hover:text-primary transition-colors duration-200 text-sm uppercase tracking-wider font-medium">Projects</a></li>
-        <li><a href="#experience" class="text-base-content-secondary hover:text-primary transition-colors duration-200 text-sm uppercase tracking-wider font-medium">Experience</a></li>
-        <li><a href="#contact" class="text-base-content-secondary hover:text-primary transition-colors duration-200 text-sm uppercase tracking-wider font-medium">Contact</a></li>
+        <li v-for="link in navLinks" :key="link.id">
+          <a
+            :href="`#${link.id}`"
+            class="relative inline-block text-base-content-secondary hover:text-primary transition-colors duration-200 text-sm uppercase tracking-wider font-medium"
+            :class="{ 'text-primary': activeSection === link.id }"
+          >
+            {{ link.label }}
+            <span
+              v-if="activeSection === link.id"
+              class="absolute -bottom-1 left-0 right-0 h-[2px] bg-primary transition-all duration-300"
+            />
+          </a>
+        </li>
 
         <!-- Language toggle -->
         <div class="flex items-center gap-2 ml-4 pl-4 border-l border-base-400">
@@ -30,11 +38,16 @@
     <!-- Mobile menu -->
     <div v-if="isOpen" class="md:hidden absolute top-full left-0 right-0 bg-base-100/95 backdrop-blur-lg border-t border-base-300">
       <ul class="px-6 py-6 space-y-4">
-        <li><a href="#about" @click="toggleMenu" class="block py-2 text-base-content-secondary hover:text-primary transition-colors text-sm uppercase tracking-wider">About</a></li>
-        <li><a href="#skills" @click="toggleMenu" class="block py-2 text-base-content-secondary hover:text-primary transition-colors text-sm uppercase tracking-wider">Skills</a></li>
-        <li><a href="#projects" @click="toggleMenu" class="block py-2 text-base-content-secondary hover:text-primary transition-colors text-sm uppercase tracking-wider">Projects</a></li>
-        <li><a href="#experience" @click="toggleMenu" class="block py-2 text-base-content-secondary hover:text-primary transition-colors text-sm uppercase tracking-wider">Experience</a></li>
-        <li><a href="#contact" @click="toggleMenu" class="block py-2 text-base-content-secondary hover:text-primary transition-colors text-sm uppercase tracking-wider">Contact</a></li>
+        <li v-for="link in navLinks" :key="link.id">
+          <a
+            :href="`#${link.id}`"
+            @click="toggleMenu"
+            class="block py-2 text-base-content-secondary hover:text-primary transition-colors text-sm uppercase tracking-wider"
+            :class="{ 'text-primary': activeSection === link.id }"
+          >
+            {{ link.label }}
+          </a>
+        </li>
 
         <!-- Language toggle -->
         <li class="pt-4 border-t border-base-300">
@@ -53,11 +66,35 @@
 import { ref, computed } from 'vue';
 import { content } from '~/lib/content';
 import { useLang } from '~/composables/useLang';
+import { useScrollProgress } from '~/composables/useScrollProgress';
 
 const isOpen = ref(false);
 const { lang, setLang } = useLang();
 const { name } = content.shared;
 const fullName = `${name.first} ${name.middle[0]}. ${name.last} ${name.maiden[0]}.`;
+
+const sectionIds = ['about', 'skills', 'projects', 'experience', 'contact'];
+const { activeSection } = useScrollProgress(sectionIds);
+
+const navLinks = computed(() => {
+  const links = {
+    en: [
+      { id: 'about', label: 'About' },
+      { id: 'skills', label: 'Skills' },
+      { id: 'projects', label: 'Projects' },
+      { id: 'experience', label: 'Experience' },
+      { id: 'contact', label: 'Contact' },
+    ],
+    es: [
+      { id: 'about', label: 'Sobre Mí' },
+      { id: 'skills', label: 'Habilidades' },
+      { id: 'projects', label: 'Proyectos' },
+      { id: 'experience', label: 'Experiencia' },
+      { id: 'contact', label: 'Contacto' },
+    ],
+  };
+  return links[lang.value] || links.en;
+});
 
 // Toggle mobile menu
 function toggleMenu() {
