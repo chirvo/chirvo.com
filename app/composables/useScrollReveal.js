@@ -85,9 +85,15 @@ export function useSectionReveal(options = {}) {
     observer = new IntersectionObserver((entries) => {
       for (const entry of entries) {
         if (entry.isIntersecting) {
-          const children = entry.target.querySelectorAll('.reveal-slow');
-          children.forEach((child) => {
+          // Reveal section children
+          const revealChildren = entry.target.querySelectorAll('.reveal-slow');
+          revealChildren.forEach((child) => {
             child.classList.add('reveal-active');
+          });
+          // Reveal stagger items (skill badges, achievements)
+          const staggerChildren = entry.target.querySelectorAll('.stagger-item');
+          staggerChildren.forEach((child) => {
+            child.classList.add('stagger-active');
           });
           observer.unobserve(entry.target);
         }
