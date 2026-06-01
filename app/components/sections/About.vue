@@ -101,16 +101,18 @@ function animateCounters() {
 }
 
 const statsRef = ref(null);
-const statsObserver = new IntersectionObserver((entries) => {
-  for (const entry of entries) {
-    if (entry.isIntersecting) {
-      animateCounters();
-      statsObserver.disconnect();
-    }
-  }
-}, { threshold: 0.3 });
 
 onMounted(() => {
+  if (typeof window === 'undefined') return;
+  const statsObserver = new IntersectionObserver((entries) => {
+    for (const entry of entries) {
+      if (entry.isIntersecting) {
+        animateCounters();
+        statsObserver.disconnect();
+      }
+    }
+  }, { threshold: 0.3 });
+
   if (statsRef.value) {
     statsObserver.observe(statsRef.value);
   }
