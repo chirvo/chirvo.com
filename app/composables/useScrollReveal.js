@@ -60,7 +60,7 @@ export function useRevealElement(options = {}) {
 /**
  * Composable that reveals all children with 'reveal-slow' class
  * when the section container enters the viewport.
- * Usage: const target = useSectionReveal(); // then bind target to section container
+ * Defers IntersectionObserver creation to onMounted for SSR safety.
  */
 export function useSectionReveal(options = {}) {
   const {
@@ -68,25 +68,41 @@ export function useSectionReveal(options = {}) {
     rootMargin = '0px 0px -40px 0px',
   } = options;
 
-  const observer = new IntersectionObserver((entries) => {
-    for (const entry of entries) {
-      if (entry.isIntersecting) {
-        // Reveal all children with reveal-slow class
-        const children = entry.target.querySelectorAll('.reveal-slow');
-        children.forEach((child) => {
-          child.classList.add('reveal-active');
-        });
-        observer.unobserve(entry.target);
-      }
-    }
-  }, { threshold, rootMargin });
+  let observer = null;
+  const queuedRefs = [];
 
   function observe(el) {
-    if (el) observer.observe(el);
+    if (!el) return;
+    if (observer) {
+      observer.observe(el);
+    } else {
+      queuedRefs.push(el);
+    }
   }
 
+  onMounted(() => {
+    if (typeof window === 'undefined') return;
+    observer = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) {
+          const children = entry.target.querySelectorAll('.reveal-slow');
+          children.forEach((child) => {
+            child.classList.add('reveal-active');
+          });
+          observer.unobserve(entry.target);
+        }
+      }
+    }, { threshold, rootMargin });
+
+    // Re-observe any refs that were queued before mount
+    for (const ref of queuedRefs) {
+      observer.observe(ref);
+    }
+    queuedRefs.length = 0;
+  });
+
   onUnmounted(() => {
-    observer.disconnect();
+    if (observer) observer.disconnect();
   });
 
   return { observe };
