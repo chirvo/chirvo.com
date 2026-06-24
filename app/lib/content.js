@@ -6,138 +6,38 @@ export const content = {
    */
   static: {
     hero: {
-      greeting: {
-        en: "Hi, my name is Irving",
-        es: "Hola, me llamo Irving",
-      },
-      items: {
-        en: [
+      en: {
+        available: "Available for senior roles & consulting",
+        role: "Full-Stack Engineer · Linux Specialist · Systems Architect",
+        years: "20+",
+        yearsText: "years engineering high-availability systems",
+        specialty: "Distributed systems · Cloud · MLOps",
+        scroll: "Scroll",
+        items: [
           {
-            headline: "Build Your Vision, Faster",
             subheadline:
-              "I help businesses create high-quality web applications, turning complex ideas into elegant, user-friendly solutions.",
-            cta: {
-              primary: "Let's Build Together",
-              secondary: "Contact Me",
-            },
-          },
-          {
-            headline: "Tired of Slow, Buggy Software?",
-            subheadline:
-              "I deliver robust and scalable code that performs. Let's build a product your users will love.",
-            cta: {
-              primary: "Upgrade Your Codebase",
-              secondary: "Contact Me",
-            },
-          },
-          {
-            headline: "Expert Full-Stack Development",
-            subheadline:
-              "From concept to deployment, I provide end-to-end development services to bring your digital products to life.",
-            cta: {
-              primary: "See My Work",
-              secondary: "Contact Me",
-            },
-          },
-          {
-            headline: "Your Startup's Next Technical Co-founder",
-            subheadline:
-              "I partner with early-stage startups to build foundational technology, ship features fast, and scale for growth.",
-            cta: {
-              primary: "Discuss Your Project",
-              secondary: "Contact Me",
-            },
-          },
-          {
-            headline: "From Idea to MVP in Record Time",
-            subheadline:
-              "Leverage my expertise in rapid prototyping and development to get your product to market before the competition.",
-            cta: {
-              primary: "Book a Free Consultation",
-              secondary: "Contact Me",
-            },
-          },
-          {
-            headline: "Senior Software Engineer",
-            subheadline:
-              "A Senior Full Stack Engineer with over two decades of experience designing high-availability systems and delivering innovative, end-to-end solutions. I turn complex technical challenges into stable, scalable, and deployed realities.",
+              "I design and ship end-to-end systems — from the Linux server in the rack to the screen in the user's hand. Senior engineer with two decades of turning complex technical problems into stable, scalable, deployed realities.",
             cta: {
               primary: "View Projects",
-              secondary: "Contact Me",
-            },
-          },
-          {
-            headline: "Your Digital Solutions Expert",
-            subheadline:
-              "I craft bespoke digital strategies and build powerful, scalable solutions to solve your most complex business challenges.",
-            cta: {
-              primary: "Solve My Problem",
-              secondary: "Learn More",
+              secondary: "Get in Touch",
             },
           },
         ],
-        es: [
+      },
+      es: {
+        available: "Disponible para roles senior y consultoría",
+        role: "Ingeniero Full-Stack · Especialista Linux · Arquitecto de Sistemas",
+        years: "+20",
+        yearsText: "años diseñando sistemas de alta disponibilidad",
+        specialty: "Sistemas distribuidos · Cloud · MLOps",
+        scroll: "Deslizar",
+        items: [
           {
-            headline: "Construye Tu Visión, Más Rápido.",
             subheadline:
-              "Ayudo a las empresas a crear aplicaciones web de alta calidad, convirtiendo ideas complejas en soluciones elegantes y fáciles de usar.",
-            cta: {
-              primary: "Construyamos Juntos",
-              secondary: "Contáctame",
-            },
-          },
-          {
-            headline: "¿Cansado de Software Lento y con Errores?",
-            subheadline:
-              "Entrego código robusto y escalable que funciona. Construyamos un producto que a tus usuarios les encantará.",
-            cta: {
-              primary: "Actualiza Tu Código",
-              secondary: "Contáctame",
-            },
-          },
-          {
-            headline: "Desarrollo Full-Stack Experto",
-            subheadline:
-              "Desde el concepto hasta el despliegue, ofrezco servicios de desarrollo de extremo a extremo para dar vida a tus productos digitales.",
-            cta: {
-              primary: "Mira Mi Trabajo",
-              secondary: "Contáctame",
-            },
-          },
-          {
-            headline: "El Próximo Cofundador Técnico de Tu Startup",
-            subheadline:
-              "Me asocio con startups en etapa inicial para construir tecnología fundamental, lanzar funcionalidades rápidamente y escalar para el crecimiento.",
-            cta: {
-              primary: "Discute Tu Proyecto",
-              secondary: "Contáctame",
-            },
-          },
-          {
-            headline: "De la Idea al MVP en Tiempo Récord",
-            subheadline:
-              "Aprovecha mi experiencia en prototipado y desarrollo rápido para llevar tu producto al mercado antes que la competencia.",
-            cta: {
-              primary: "Reserva una Consulta Gratuita",
-              secondary: "Contáctame",
-            },
-          },
-          {
-            headline: "Ingeniero de Software Senior",
-            subheadline:
-              "Un Ingeniero Full Stack Senior con más de dos décadas de experiencia diseñando sistemas de alta disponibilidad y entregando soluciones innovadoras, de extremo a extremo. Convierto desafíos técnicos complejos en realidades estables, escalables y desplegadas.",
+              "Diseño y entrego sistemas de extremo a extremo — desde el servidor Linux en el rack hasta la pantalla del usuario. Ingeniero senior con dos décadas convirtiendo problemas técnicos complejos en realidades estables, escalables y desplegadas.",
             cta: {
               primary: "Ver Proyectos",
-              secondary: "Contáctame",
-            },
-          },
-          {
-            headline: "Tu Experto en Soluciones Digitales",
-            subheadline:
-              "Creo estrategias digitales a medida y construyo soluciones potentes y escalables para resolver tus desafíos empresariales más complejos.",
-            cta: {
-              primary: "Resuelve Mi Problema",
-              secondary: "Saber Más",
+              secondary: "Contactar",
             },
           },
         ],
@@ -156,78 +56,86 @@ export const content = {
       },
     },
     competencies: {
-      // Non-translatable skill lists are now "shared" within this section
-      pillars: [
-        {
-          en: { title: "Development & Engineering" },
-          es: { title: "Desarrollo e Ingeniería" },
-          skills: [
-            "JavaScript (Node.js)",
-            "TypeScript",
-            "PHP (Yii, Zend)",
-            "Python",
-            "Ruby",
-            "Bash",
-            "Java",
-            "C/C++",
-            "HTML5",
-            "CSS3",
-            "Fastify",
-            "WordPress",
-            "API Development (JSON:API, Swagger)",
-            "Test-Driven Development (TDD)",
-            "AI-Assisted Programming",
-          ],
-        },
-        {
-          en: { title: "Systems & Infrastructure" },
-          es: { title: "Sistemas e Infraestructura" },
-          skills: [
-            "Debian GNU/Linux",
-            "Ubuntu",
-            "Red Hat/CentOS",
-            "Oracle Solaris",
-            "PostgreSQL",
-            "MySQL",
-            "Memcached",
-            "Prisma ORM",
-            "Amazon AWS (EC2, S3, RDS)",
-            "Proxmox",
-            "KVM",
-            "VMWare",
-            "Docker",
-            "Docker-Compose",
-            "Nginx",
-            "Apache",
-            "Squid",
-            "TCP/IP",
-            "VPN",
-            "DNS",
-            "DHCP",
-          ],
-        },
-        {
-          en: { title: "Specialized Expertise" },
-          es: { title: "Experiencia Especializada" },
-          skills: [
-            "Scalable Platform Architecture",
-            "High-Availability Systems",
-            "Network Engineering (PtP/PtmP)",
-            "MLOps & Local LLM Deployment",
-            "Cryptocurrency Mining Platforms",
-            "Linux System Hardening",
-            "Full MLOps Lifecycle",
-            "Cost-Saving Infrastructure Design",
-          ],
-        },
-      ],
-      // Translatable section title
       en: {
         title: "Core Competencies",
       },
       es: {
         title: "Competencias Clave",
       },
+      clusters: [
+        {
+          id: "dev",
+          en: { title: "Development & APIs", subtitle: "Languages, frameworks, APIs. What I ship daily." },
+          es: { title: "Desarrollo y APIs", subtitle: "Lenguajes, frameworks, APIs. Lo que entrego a diario." },
+          skills: [
+            { name: "TypeScript",                weight: 5, since: 2015, frequency: "daily",      en: "Type-safe JavaScript — default for all new projects and AI tooling.",                                                                                                                                                es: "JavaScript con tipos — por defecto en todo proyecto nuevo y tooling de IA.",                                                                                                       bridges: ["Vite", "React", "Vue", "Node.js", "AI Coding (Claude, Cursor)"] },
+            { name: "JavaScript (Node.js)",      weight: 5, since: 2012, frequency: "daily",      en: "Backend runtime of choice. Async-first, no compromises.",                                                                                                                                                            es: "Runtime backend por elección. Async-first, sin compromisos.",                                                                                                                          bridges: ["Fastify", "TypeScript", "Bun", "Local LLM Deployment"] },
+            { name: "Python",                    weight: 4, since: 2008, frequency: "weekly",     en: "Scripting, data work, and AI tooling. FastAPI when a Python service is warranted.",                                                                                                                                 es: "Scripting, datos y tooling de IA. FastAPI cuando un servicio en Python se justifica.",                                                                                              bridges: ["Local LLM Deployment", "MLOps Lifecycle", "OCR Solutions"] },
+            { name: "Bun",                       weight: 3, since: 2023, frequency: "weekly",     en: "Newer runtime. Used for side projects, CLIs, and fast dev servers.",                                                                                                                                                  es: "Runtime más nuevo. Para side projects, CLIs y dev servers rápidos.",                                                                                                                    bridges: ["TypeScript", "Node.js"] },
+            { name: "PHP (Yii, Zend)",           weight: 4, since: 2005, frequency: "monthly",    en: "Legacy enterprise stacks — maintained, hardened, and migrated to modern PHP 8.x.",                                                                                                                                es: "Stacks enterprise legacy — mantenidos, endurecidos y migrados a PHP 8.x moderno.",                                                                                                  bridges: ["MySQL", "Nginx & Apache"] },
+            { name: "Bash",                      weight: 5, since: 2003, frequency: "daily",      en: "The glue. Automation, server admin, deployment scripts. If it runs more than twice, it gets a script.",                                                                                                            es: "El pegamento. Automatización, admin de servidores, scripts de deploy. Si corre más de dos veces, tiene script.",                                                                  bridges: ["Linux System Hardening", "Debian/Ubuntu GNU/Linux", "Docker & Docker-Compose"] },
+            { name: "Fastify",                   weight: 4, since: 2018, frequency: "weekly",     en: "The Node.js web framework. Fast, schema-based, low overhead. Powers most of my API servers.",                                                                                                                       es: "El framework web para Node.js. Rápido, schema-based, ligero. Motor de la mayoría de mis API servers.",                                                                            bridges: ["Node.js", "RAG & Vector DBs", "TypeScript", "REST & JSON:API"] },
+            { name: "REST & JSON:API",           weight: 5, since: 2010, frequency: "daily",      en: "API design is a craft. Spec-first, OpenAPI 3, JSON:API where the shape fits.",                                                                                                                                          es: "Diseñar APIs es un oficio. Spec-first, OpenAPI 3, JSON:API donde la forma encaja.",                                                                                                  bridges: ["Fastify", "TypeScript"] },
+            { name: "Test-Driven Development",   weight: 4, since: 2010, frequency: "daily",      en: "Discipline, not dogma. Tests are documentation that runs — and survives refactors.",                                                                                                                                 es: "Disciplina, no dogma. Los tests son documentación que corre — y sobrevive a refactors.",                                                                                          bridges: ["TypeScript", "Fastify"] },
+            { name: "HTML5 & CSS3",              weight: 4, since: 2003, frequency: "daily",      en: "Semantic markup and modern CSS — Grid, Flex, custom properties, container queries. No frameworks when none are needed.",                                                                                       es: "Markup semántico y CSS moderno — Grid, Flex, custom properties, container queries. Sin frameworks cuando no hacen falta.",                                                       bridges: ["Vue", "React"] },
+            { name: "React",                     weight: 4, since: 2016, frequency: "daily",      en: "Component-driven UI. Hooks, state management, server components. The default for new SPAs.",                                                                                                                          es: "UI dirigida por componentes. Hooks, state, server components. El default para SPAs nuevas.",                                                                                          bridges: ["TypeScript", "Vite", "Next.js", "Vue"] },
+            { name: "Vue",                       weight: 3, since: 2017, frequency: "weekly",     en: "Composition API, SFCs. Lighter footprint than React for many use cases — and Nuxt when SSR matters.",                                                                                                                es: "Composition API, SFCs. Más liviano que React en muchos casos — y Nuxt cuando el SSR importa.",                                                                                  bridges: ["TypeScript", "Vite", "HTML5 & CSS3"] },
+            { name: "Vite",                      weight: 5, since: 2020, frequency: "daily",      en: "Build tool of choice for modern projects. Fast HMR, native ESM, great DX.",                                                                                                                                            es: "Build tool de elección para proyectos modernos. HMR rápido, ESM nativo, gran DX.",                                                                                                 bridges: ["TypeScript", "React", "Vue", "Bun"] },
+            { name: "Perl",                      weight: 2, since: 2002, frequency: "occasional", en: "Still in the toolbox. Legacy maintenance, CGI scripts, regex wizardry. Once fluent, never forgotten.",                                                                                                                es: "Sigue en la caja de herramientas. Mantenimiento legacy, CGI, brujería de regex. Una vez fluido, nunca olvidado.",                                                              bridges: [] },
+            { name: "C/C++",                     weight: 3, since: 2002, frequency: "occasional", en: "Lower-level work when warranted. Embedded, performance-critical paths, native modules.",                                                                                                                              es: "Trabajo de bajo nivel cuando se justifica. Embebido, caminos críticos de performance, módulos nativos.",                                                                        bridges: [] },
+            { name: "Ruby",                      weight: 2, since: 2006, frequency: "occasional", en: "Quick scripts, Sinatra services, the occasional legacy Rails.",                                                                                                                                                       es: "Scripts rápidos, servicios con Sinatra, el Rails legacy ocasional.",                                                                                                                  bridges: [] },
+            { name: "Java",                      weight: 3, since: 2004, frequency: "occasional", en: "Enterprise work. Spring Boot when a JVM is the requirement, not the preference.",                                                                                                                                       es: "Trabajo enterprise. Spring Boot cuando la JVM es requisito, no preferencia.",                                                                                                      bridges: [] },
+          ],
+        },
+        {
+          id: "ai",
+          en: { title: "AI-Native Engineering", subtitle: "Shipping with LLMs — not as a black box." },
+          es: { title: "Ingeniería Nativa en IA", subtitle: "Entregando con LLMs, sin caja negra." },
+          skills: [
+            { name: "Prompt Engineering",                  weight: 5, since: 2023, frequency: "daily",   en: "The discipline. System prompts, few-shot, chain-of-thought, eval-driven iteration. Not magic — engineering.",                                                                                                            es: "La disciplina. System prompts, few-shot, chain-of-thought, iteración guiada por evals. No es magia — es ingeniería.",                                          bridges: ["AI Coding (Claude, Cursor)", "RAG & Vector DBs", "Model Context Protocol (MCP)"] },
+            { name: "AI Coding (Claude, Cursor)",         weight: 5, since: 2023, frequency: "daily",   en: "Daily driver for production code. Claude Code and Cursor — not autocomplete, full pair-programming.",                                                                                                                  es: "Driver diario para código de producción. Claude Code y Cursor — no autocompletar, pair-programming completo.",                                                          bridges: ["TypeScript", "Node.js", "Prompt Engineering", "Model Context Protocol (MCP)"] },
+            { name: "RAG & Vector DBs",                   weight: 4, since: 2024, frequency: "weekly",  en: "Embeddings, retrieval pipelines, pgvector and Pinecone. The boring plumbing that makes LLMs useful.",                                                                                                                  es: "Embeddings, pipelines de retrieval, pgvector y Pinecone. La plomería aburrida que hace útiles a los LLMs.",                                                              bridges: ["PostgreSQL", "Fastify", "Python", "Prompt Engineering"] },
+            { name: "Model Context Protocol (MCP)",       weight: 3, since: 2024, frequency: "weekly",  en: "Connecting LLMs to tools. The plumbing layer for AI agents and tool-using assistants.",                                                                                                                                es: "Conectando LLMs a herramientas. La capa de plomería para agentes de IA y asistentes que usan tools.",                                                                    bridges: ["AI Coding (Claude, Cursor)", "Fastify", "Node.js"] },
+            { name: "Local LLM Deployment",               weight: 4, since: 2023, frequency: "weekly",  en: "Ollama, vLLM, llama.cpp. Privacy-first, cost-controlled, latency-bounded. Self-hosted beats vendor for many workloads.",                                                                                          es: "Ollama, vLLM, llama.cpp. Privacy-first, costo controlado, latencia acotada. Self-hosted gana al vendor en muchos casos.",                                  bridges: ["Docker & Docker-Compose", "Python", "Nginx & Apache", "Linux System Hardening"] },
+            { name: "MLOps Lifecycle",                     weight: 3, since: 2022, frequency: "monthly", en: "Training, eval, monitoring, retraining. The full loop — not just inference.",                                                                                                                                            es: "Entrenar, evals, monitor, reentrenar. El ciclo completo — no solo inferencia.",                                                                                                  bridges: ["Python", "Docker & Docker-Compose", "LLM Observability"] },
+            { name: "OpenWebUI & ComfyUI",                 weight: 3, since: 2024, frequency: "occasional", en: "Self-hosted chat and image-gen interfaces. The visual layer of local AI.",                                                                                                                                            es: "Interfaces self-hosted de chat e imagen. La capa visual de la IA local.",                                                                                                       bridges: ["Local LLM Deployment", "Docker & Docker-Compose"] },
+            { name: "LLM Observability",                   weight: 3, since: 2024, frequency: "weekly",  en: "Langfuse, Helicone, custom logging. You can't improve what you don't measure — same rule as always.",                                                                                                                  es: "Langfuse, Helicone, logging custom. No podés mejorar lo que no medís — la misma regla de siempre.",                                                                         bridges: ["MLOps Lifecycle", "AI Coding (Claude, Cursor)"] },
+          ],
+        },
+        {
+          id: "systems",
+          en: { title: "Systems & Infrastructure", subtitle: "Linux, cloud, and the backbone under the stack." },
+          es: { title: "Sistemas e Infraestructura", subtitle: "Linux, nube y la columna vertebral." },
+          skills: [
+            { name: "Debian/Ubuntu GNU/Linux",    weight: 5, since: 2003, frequency: "daily",   en: "Default server OS. apt, systemd, the usual. First love, still.",                                                                                                                                                       es: "OS servidor por defecto. apt, systemd, lo de siempre. Primer amor, aún.",                                                                                                            bridges: ["Bash", "Nginx & Apache", "Docker & Docker-Compose", "Arch Linux"] },
+            { name: "Arch Linux",                 weight: 4, since: 2008, frequency: "weekly",  en: "Personal daily-driver. Pacman, AUR, the rolling release model. LFS build once — the rite of passage.",                                                                                                                es: "Driver diario personal. Pacman, AUR, el modelo rolling release. Un build de LFS — el rito de pasaje.",                                                                  bridges: ["Debian/Ubuntu GNU/Linux", "Bash"] },
+            { name: "Red Hat/CentOS",             weight: 3, since: 2008, frequency: "monthly", en: "Enterprise work. RHEL, CentOS Stream, rpm/dnf. When a client is on it, I'm on it.",                                                                                                                                 es: "Trabajo enterprise. RHEL, CentOS Stream, rpm/dnf. Cuando un cliente está ahí, yo estoy ahí.",                                                                              bridges: ["Debian/Ubuntu GNU/Linux"] },
+            { name: "Amazon AWS (EC2, S3, RDS)",  weight: 4, since: 2012, frequency: "weekly",  en: "Cloud workhorse. EC2 for compute, S3 for storage, RDS for managed DBs. TCO-aware, not fashion-driven.",                                                                                                                es: "El caballo de batalla de la nube. EC2 para cómputo, S3 para storage, RDS para DBs administradas. TCO-aware, no fashion-driven.",                                   bridges: ["Debian/Ubuntu GNU/Linux", "PostgreSQL", "Docker & Docker-Compose"] },
+            { name: "Docker & Docker-Compose",    weight: 5, since: 2015, frequency: "daily",   en: "Containerization. Compose for dev, swarm for small prod, k8s only when the org needs it.",                                                                                                                              es: "Containerización. Compose para dev, swarm para prod pequeño, k8s solo cuando la org lo necesita.",                                                                           bridges: ["Debian/Ubuntu GNU/Linux", "Nginx & Apache", "Local LLM Deployment", "Bash"] },
+            { name: "Proxmox & KVM",              weight: 3, since: 2016, frequency: "monthly", en: "Virtualization. Self-hosted clusters for cost savings and learning. Beats cloud when scale is moderate.",                                                                                                                es: "Virtualización. Clusters self-hosted para ahorrar costos y aprender. Le gana a la nube cuando la escala es moderada.",                                                  bridges: ["Debian/Ubuntu GNU/Linux", "Linux System Hardening"] },
+            { name: "Nginx & Apache",             weight: 5, since: 2004, frequency: "daily",   en: "Web servers. Nginx in front of Node/PHP, Apache for legacy. Reverse proxies, TLS termination, the works.",                                                                                                              es: "Servidores web. Nginx delante de Node/PHP, Apache para legacy. Reverse proxies, TLS termination, todo eso.",                                                              bridges: ["Docker & Docker-Compose", "PHP (Yii, Zend)", "Debian/Ubuntu GNU/Linux"] },
+            { name: "PostgreSQL",                 weight: 5, since: 2008, frequency: "daily",   en: "Primary database. JSONB, full-text search, pgvector — the most versatile datastore I know.",                                                                                                                            es: "Base de datos primaria. JSONB, full-text search, pgvector — el datastore más versátil que conozco.",                                                                       bridges: ["RAG & Vector DBs", "Prisma ORM", "Nginx & Apache"] },
+            { name: "MySQL",                      weight: 4, since: 2005, frequency: "weekly",  en: "Legacy systems, WordPress, the usual. Still tuned by hand when needed.",                                                                                                                                                es: "Sistemas legacy, WordPress, lo de siempre. Tuned a mano cuando hace falta.",                                                                                                    bridges: ["WordPress", "Nginx & Apache"] },
+            { name: "Memcached",                  weight: 3, since: 2010, frequency: "monthly", en: "When you need a fast cache, this is the boring answer. Battle-tested for fifteen years.",                                                                                                                                es: "Cuando necesitás un cache rápido, esta es la respuesta aburrida. Battle-tested por quince años.",                                                                            bridges: ["PostgreSQL"] },
+            { name: "TCP/IP & VPN",               weight: 4, since: 2006, frequency: "monthly", en: "Network fundamentals. WireGuard, OpenVPN, IPsec. ISP-level work in another life.",                                                                                                                                     es: "Fundamentos de red. WireGuard, OpenVPN, IPsec. Trabajo de ISP en otra vida.",                                                                                                    bridges: ["Network Engineering (PtP/PtmP)", "Linux System Hardening"] },
+            { name: "DNS & DHCP",                 weight: 3, since: 2006, frequency: "monthly", en: "BIND, dnsmasq, Unbound. Core network services that nobody notices when they work.",                                                                                                                                      es: "BIND, dnsmasq, Unbound. Servicios de red clave que nadie nota cuando funcionan.",                                                                                              bridges: ["Debian/Ubuntu GNU/Linux"] },
+            { name: "Prisma ORM",                 weight: 3, since: 2020, frequency: "weekly",  en: "Node.js ORM. Type-safe queries, migrations, schema-first. Default for new Node data layers.",                                                                                                                              es: "ORM para Node.js. Queries type-safe, migraciones, schema-first. Default para capas de datos nuevas en Node.",                                                              bridges: ["PostgreSQL", "TypeScript", "Node.js"] },
+          ],
+        },
+        {
+          id: "specialized",
+          en: { title: "Specialized Experience", subtitle: "Niche depth from two decades of the unusual." },
+          es: { title: "Experiencia Especializada", subtitle: "Profundidad de nicho de dos décadas." },
+          skills: [
+            { name: "High-Availability Architecture",  weight: 5, since: 2008, frequency: "daily",   en: "Designing for failure. Load balancing, replication, failover, the boring discipline that keeps things up.",                                                                                                          es: "Diseñar para el fallo. Load balancing, replicación, failover, la disciplina aburrida que mantiene las cosas arriba.",                                          bridges: ["Debian/Ubuntu GNU/Linux", "PostgreSQL", "Docker & Docker-Compose"] },
+            { name: "Cryptocurrency Mining Platforms", weight: 4, since: 2017, frequency: "occasional", en: "Built a distributed mining operation. Custom read-only Ubuntu, monitoring dashboards, 150+ nodes. The systems-engineering capstone of my freelancing years.",                                                  es: "Construí una operación de minería distribuida. Ubuntu read-only custom, dashboards de monitoreo, 150+ nodos. El capstone de systems engineering de mis años freelance.", bridges: ["Linux System Hardening", "Debian/Ubuntu GNU/Linux", "Docker & Docker-Compose"] },
+            { name: "Network Engineering (PtP/PtmP)",   weight: 4, since: 2008, frequency: "occasional", en: "ISP-level networking. Wireless backhauls, PtP and PtmP links, network ops from another career.",                                                                                                                      es: "Networking a nivel ISP. Backhauls inalámbricos, enlaces PtP y PtmP, network ops de otra carrera.",                                                                          bridges: ["TCP/IP & VPN", "DNS & DHCP", "Linux System Hardening"] },
+            { name: "Linux System Hardening",          weight: 5, since: 2010, frequency: "weekly",  en: "CIS benchmarks, SELinux/AppArmor, minimal attack surface. Default posture for anything I deploy.",                                                                                                                       es: "CIS benchmarks, SELinux/AppArmor, mínima superficie de ataque. Postura por defecto para todo lo que despliego.",                                                          bridges: ["Debian/Ubuntu GNU/Linux", "Bash", "Network Engineering (PtP/PtmP)"] },
+            { name: "OCR Solutions",                   weight: 3, since: 2012, frequency: "occasional", en: "Tesseract, custom preprocessing pipelines. Document digitization for a newspaper-era client base.",                                                                                                                      es: "Tesseract, pipelines de preprocesamiento custom. Digitalización de documentos para una base de clientes de era papel.",                                                bridges: ["Python", "Bash"] },
+            { name: "Cost-Saving Infrastructure Design", weight: 4, since: 2015, frequency: "weekly",  en: "Right-sizing, reserved capacity, self-hosted alternatives. The unsexy work that pays the bills.",                                                                                                                          es: "Right-sizing, capacidad reservada, alternativas self-hosted. El trabajo poco sexy que paga las cuentas.",                                                                   bridges: ["Proxmox & KVM", "Amazon AWS (EC2, S3, RDS)", "Debian/Ubuntu GNU/Linux"] },
+          ],
+        },
+      ],
     },
     projects: {
       en: {
@@ -259,10 +167,12 @@ export const content = {
     },
     footer: {
       en: {
-        copyright: "© 2025 Irving A. Bermúdez S. - All rights reserved.",
+        copyright: "© 2025 Irving A. Bermúdez S. — All rights reserved.",
+        tagline: "Designing and shipping end-to-end systems — from the Linux server to the user's screen.",
       },
       es: {
-        copyright: "© 2025 Irving A. Bermúdez S. - Todos los derechos reservados.",
+        copyright: "© 2025 Irving A. Bermúdez S. — Todos los derechos reservados.",
+        tagline: "Diseñando y entregando sistemas de extremo a extremo — desde el servidor Linux hasta la pantalla del usuario.",
       },
     },
   },
@@ -427,7 +337,7 @@ export const content = {
             "Hardware Optimization",
             "Distributed Systems",
           ],
-          image: "https://placehold.co/400x200?text=Crypto+Project",
+          image: "/images/project-crypto.jpg",
           en: {
             title: "Scalable Cryptocurrency Mining Platform",
             description:
@@ -452,7 +362,7 @@ export const content = {
             "AI Programming",
             "RBAC",
           ],
-          image: "https://placehold.co/400x200?text=REST+API+Project",
+          image: "/images/project-api.jpg",
           en: {
             title: "AI-Assisted Modern API Development",
             description:
@@ -473,7 +383,7 @@ export const content = {
             "Zend Framework",
             "Tech Leadership",
           ],
-          image: "https://placehold.co/400x200?text=Rewrite+Project",
+          image: "/images/project-code.jpg",
           en: {
             title: "Critical Application Rewrite (8x Performance Gain)",
             description:
@@ -495,7 +405,7 @@ export const content = {
             "Wireless",
             "Entrepreneurship",
           ],
-          image: "https://placehold.co/400x200?text=ISP+Project",
+          image: "/images/project-isp.jpg",
           en: {
             title: "ISP Co-Founder & Network Architect",
             description:
@@ -509,7 +419,7 @@ export const content = {
         },
         {
           tags: ["MLOps", "LLM", "Docker", "AI", "OpenWebUI", "ComfyUI", "GPU", "Self-Hosting"],
-          image: "https://placehold.co/400x200?text=LLM+Project",
+          image: "/images/project-llm.jpg",
           en: {
             title: "Local LLM & MLOps Experimentation",
             description:

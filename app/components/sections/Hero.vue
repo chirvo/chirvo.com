@@ -1,234 +1,145 @@
 <template>
-  <section class="hero-glow bg-gradient-hero min-h-screen relative overflow-hidden flex items-center justify-center">
-    <!-- Subtle grid -->
-    <div class="absolute inset-0 bg-grid-pattern opacity-40"></div>
-    <div class="bg-glow-orb" style="top: -10%; left: 20%;"></div>
-    <div class="bg-glow-orb" style="bottom: -10%; right: 20%;"></div>
+  <section class="bg-gradient-hero min-h-screen relative overflow-hidden flex items-center">
+    <!-- Subtle grid + noise overlay -->
+    <div class="absolute inset-0 bg-grid-pattern pointer-events-none"></div>
+    <div class="absolute inset-0 bg-noise pointer-events-none"></div>
 
-    <div class="container mx-auto px-6 py-16 md:py-24 relative z-10 flex flex-col items-center">
-      <div class="max-w-3xl flex flex-col items-center text-center gap-4">
-        <!-- Greeting -->
-        <p class="text-sm md:text-base text-base-content-secondary font-mono tracking-widest uppercase">
-          {{ heroGreeting }}
-        </p>
+    <!-- Top fade to header -->
+    <div class="absolute top-0 left-0 right-0 h-24 bg-linear-to-b from-base-100 to-transparent pointer-events-none"></div>
 
-        <!-- Headline with typewriter -->
-        <h1 ref="headlineRef" class="font-display text-3xl md:text-5xl lg:text-6xl font-light text-base-content leading-tight min-h-[1.2em]">
-          <span ref="typedTextRef"></span><span class="cursor-blink">|</span>
+    <div class="container mx-auto px-6 md:px-8 relative z-10 pt-32 pb-20">
+      <div class="max-w-5xl">
+        <!-- Eyebrow -->
+        <div class="flex items-center gap-3 mb-8 hero-eyebrow">
+          <span class="w-8 h-px bg-primary"></span>
+          <span class="font-mono text-xs uppercase tracking-[0.2em] text-primary">
+            {{ availableLabel }}
+          </span>
+        </div>
+
+        <!-- Headline -->
+        <h1 class="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-medium leading-[0.95] tracking-tight mb-8 hero-headline">
+          <span class="block text-base-content">{{ firstName }}</span>
+          <span class="block text-gradient">{{ lastName }}</span>
         </h1>
 
-        <!-- Subheadline -->
-        <p ref="subRef" class="text-base md:text-lg text-base-content-secondary leading-relaxed min-h-[1.5em]">
-          <span ref="subTextRef" class="sub-fade"></span>
+        <!-- Role -->
+        <p class="font-mono text-sm md:text-base text-base-content-secondary tracking-wide mb-8 hero-role">
+          {{ roleLabel }}
         </p>
 
-        <!-- CTA buttons -->
-        <div ref="ctaRef" class="flex flex-wrap justify-center gap-4 opacity-0 transition-opacity duration-500">
-          <a :href="'#projects'" class="btn btn-primary">{{ currentCtaPrimary }}</a>
-          <a :href="'#contact'" class="btn btn-secondary">{{ currentCtaSecondary }}</a>
-        </div>
+        <!-- Subheadline -->
+        <p class="text-lg md:text-xl text-base-content-secondary max-w-2xl leading-relaxed mb-12 hero-sub">
+          {{ subheadline }}
+        </p>
 
-        <!-- Slide indicators -->
-        <div ref="indicatorsRef" class="flex gap-2 mt-6 opacity-0 transition-opacity duration-500">
-          <button
-            v-for="(_, i) in heroContent"
-            :key="i"
-            @click="goToSlide(i)"
-            :class="['w-2 h-2 rounded-full transition-all duration-300', currentSlide === i ? 'bg-primary w-6' : 'bg-base-content/20 hover:bg-base-content/40']"
-            :aria-label="'Go to slide ' + (i + 1)"
-          />
-        </div>
-
-        <!-- Social links -->
-        <div ref="socialRef" class="flex flex-wrap justify-center gap-4 mt-4 opacity-0 transition-opacity duration-500">
-          <a :href="heroLinks.github" target="_blank" rel="noopener noreferrer"
-            class="text-base-content-secondary hover:text-primary transition-colors duration-200 text-sm uppercase tracking-wider flex items-center gap-2">
-            <Icon name="simple-icons:github" size="18" />
-            GitHub
-          </a>
-          <a :href="heroLinks.linkedin" target="_blank" rel="noopener noreferrer"
-            class="text-base-content-secondary hover:text-primary transition-colors duration-200 text-sm uppercase tracking-wider flex items-center gap-2">
-            <Icon name="simple-icons:linkedin" size="18" />
-            LinkedIn
-          </a>
-          <a :href="'mailto:' + heroLinks.email"
-            class="text-base-content-secondary hover:text-primary transition-colors duration-200 text-sm uppercase tracking-wider flex items-center gap-2">
-            <svg class="w-[18px] h-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
-              <path d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 01-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/>
+        <!-- CTAs -->
+        <div class="flex flex-wrap items-center gap-3 mb-16 hero-ctas">
+          <a :href="'#projects'" class="btn btn-primary">
+            {{ ctaPrimary }}
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+              <path d="M17 8l4 4m0 0l-4 4m4-4H3" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
-            Email
           </a>
+          <a :href="'#contact'" class="btn btn-secondary">
+            {{ ctaSecondary }}
+          </a>
+        </div>
+
+        <!-- Meta row — quick proof points -->
+        <div class="flex flex-wrap items-center gap-x-8 gap-y-4 hero-meta">
+          <div class="flex items-center gap-2.5">
+            <span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+            <span class="font-mono text-xs text-base-content-secondary">
+              <span class="text-base-content">{{ yearsLabel }}</span> {{ yearsText }}
+            </span>
+          </div>
+          <div class="flex items-center gap-2.5">
+            <span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+            <span class="font-mono text-xs text-base-content-secondary">
+              <span class="text-base-content">{{ specialtyLabel }}</span>
+            </span>
+          </div>
+          <div class="flex items-center gap-3 ml-auto">
+            <a
+              v-for="link in socialLinks"
+              :key="link.label"
+              :href="link.href"
+              target="_blank"
+              rel="noopener noreferrer"
+              :aria-label="link.label"
+              class="text-base-content-secondary hover:text-primary transition-colors"
+            >
+              <Icon :name="link.icon" size="20" />
+            </a>
+          </div>
         </div>
       </div>
+    </div>
+
+    <!-- Scroll cue -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 hero-scroll">
+      <span class="font-mono text-[10px] uppercase tracking-[0.3em] text-base-content-muted">{{ scrollLabel }}</span>
+      <div class="w-px h-10 bg-linear-to-b from-primary to-transparent"></div>
     </div>
   </section>
 </template>
 
 <script setup>
-import { computed, ref, onMounted, onUnmounted } from 'vue';
+import { computed } from 'vue';
 import { content } from '~/lib/content';
 import { useLang } from '~/composables/useLang';
 
 const { lang } = useLang();
-const heroGreeting = computed(() => content.static.hero.greeting[lang.value]);
-const heroContent = computed(() => content.static.hero.items[lang.value]);
-const heroLinks = content.shared.links;
+const hero = computed(() => content.static.hero[lang.value]);
+const headline = computed(() => content.static.hero[lang.value].items[0]);
+const firstName = computed(() => `${content.shared.name.first}`);
+const lastName = computed(() => `${content.shared.name.last} ${content.shared.name.maiden[0]}.`);
 
-// Typewriter state
-const typedTextRef = ref(null);
-const subTextRef = ref(null);
-const subRef = ref(null);
-const ctaRef = ref(null);
-const socialRef = ref(null);
-const indicatorsRef = ref(null);
+const availableLabel = computed(() => hero.value.available);
+const roleLabel = computed(() => hero.value.role);
+const subheadline = computed(() => headline.value.subheadline);
+const ctaPrimary = computed(() => headline.value.cta.primary);
+const ctaSecondary = computed(() => headline.value.cta.secondary);
+const yearsLabel = computed(() => hero.value.years);
+const yearsText = computed(() => hero.value.yearsText);
+const specialtyLabel = computed(() => hero.value.specialty);
+const scrollLabel = computed(() => hero.value.scroll);
 
-const currentSlide = ref(0);
-let typewriterTimer = null;
-let carouselTimer = null;
-
-// Current CTA text (reactive to slide)
-const currentCtaPrimary = computed(() => content.static.hero.items[lang.value][currentSlide.value]?.cta.primary || '');
-const currentCtaSecondary = computed(() => content.static.hero.items[lang.value][currentSlide.value]?.cta.secondary || '');
-
-// Typewriter effect
-function typewrite(element, text, speed = 50, callback) {
-  let i = 0;
-  element.textContent = '';
-
-  function type() {
-    if (i < text.length) {
-      element.textContent += text.charAt(i);
-      i++;
-      typewriterTimer = setTimeout(type, speed);
-    } else if (callback) {
-      callback();
-    }
-  }
-
-  type();
-}
-
-// Clear typewriter and reset
-function clearTypewriter() {
-  if (typewriterTimer) {
-    clearTimeout(typewriterTimer);
-    typewriterTimer = null;
-  }
-}
-
-// Start typewriter sequence for a given slide
-function startTypewriterForSlide(slideIndex) {
-  clearTypewriter();
-  currentSlide.value = slideIndex;
-
-  const item = content.static.hero.items[lang.value][slideIndex];
-  if (!item) return;
-
-  // Reset refs
-  if (typedTextRef.value) typedTextRef.value.textContent = '';
-  if (subTextRef.value) {
-    subTextRef.value.textContent = '';
-    subTextRef.value.classList.remove('sub-visible');
-  }
-
-  // Phase 1: Type headline
-  typewrite(typedTextRef.value, item.headline, 45, () => {
-    // Phase 2: Fade-in subheadline (not typewriter)
-    typewriterTimer = setTimeout(() => {
-      if (subTextRef.value) {
-        subTextRef.value.textContent = item.subheadline;
-        subTextRef.value.classList.add('sub-visible');
-      }
-
-      // After subheadline fades in, show CTA + socials + indicators
-      typewriterTimer = setTimeout(() => {
-        if (ctaRef.value) ctaRef.value.classList.remove('opacity-0');
-        if (socialRef.value) socialRef.value.classList.remove('opacity-0');
-        if (indicatorsRef.value) indicatorsRef.value.classList.remove('opacity-0');
-
-        // Start carousel after pause
-        carouselTimer = setTimeout(() => {
-          advanceSlide();
-        }, 6000);
-      }, 500);
-    }, 800);
-  });
-}
-
-// Advance to next slide
-function advanceSlide() {
-  const items = content.static.hero.items[lang.value];
-  const nextSlide = (currentSlide.value + 1) % items.length;
-
-  // Fade out current content
-  if (ctaRef.value) ctaRef.value.classList.add('opacity-0');
-  if (socialRef.value) socialRef.value.classList.add('opacity-0');
-  if (indicatorsRef.value) indicatorsRef.value.classList.add('opacity-0');
-
-  // Clear existing typewriter
-  clearTypewriter();
-
-  // Start new typewriter sequence
-  typewriterTimer = setTimeout(() => {
-    // Fade out subheadline before switching
-    if (subTextRef.value) {
-      subTextRef.value.classList.remove('sub-visible');
-    }
-    startTypewriterForSlide(nextSlide);
-  }, 400);
-}
-
-// Go to specific slide
-function goToSlide(index) {
-  clearTypewriter();
-  if (carouselTimer) clearTimeout(carouselTimer);
-
-  // Fade out
-  if (ctaRef.value) ctaRef.value.classList.add('opacity-0');
-  if (socialRef.value) socialRef.value.classList.add('opacity-0');
-  if (indicatorsRef.value) indicatorsRef.value.classList.add('opacity-0');
-
-  typewriterTimer = setTimeout(() => {
-    startTypewriterForSlide(index);
-  }, 300);
-}
-
-onMounted(() => {
-  // Allow layout to settle before starting
-  requestAnimationFrame(() => {
-    requestAnimationFrame(() => {
-      startTypewriterForSlide(0);
-    });
-  });
-});
-
-onUnmounted(() => {
-  clearTypewriter();
-  if (carouselTimer) clearTimeout(carouselTimer);
-});
+const socialLinks = [
+  { label: 'GitHub', href: content.shared.links.github, icon: 'simple-icons:github' },
+  { label: 'LinkedIn', href: content.shared.links.linkedin, icon: 'simple-icons:linkedin' },
+  { label: 'Email', href: `mailto:${content.shared.links.email}`, icon: 'simple-icons:gmail' },
+];
 </script>
 
 <style scoped>
-.cursor-blink {
-  animation: blink 1s step-end infinite;
-  color: var(--color-primary);
-  font-weight: 300;
+.hero-eyebrow,
+.hero-headline,
+.hero-role,
+.hero-sub,
+.hero-ctas,
+.hero-meta,
+.hero-scroll {
+  animation: hero-in 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.hero-eyebrow { animation-delay: 0.1s; }
+.hero-headline { animation-delay: 0.2s; }
+.hero-role     { animation-delay: 0.35s; }
+.hero-sub      { animation-delay: 0.45s; }
+.hero-ctas     { animation-delay: 0.55s; }
+.hero-meta     { animation-delay: 0.7s; }
+.hero-scroll   { animation-delay: 1.2s; }
+
+@keyframes hero-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
-}
-
-/* Subheadline fade-in — subtle, professional */
-.sub-fade {
-  opacity: 0;
-  transform: translateY(6px);
-  transition: opacity 0.5s ease, transform 0.5s ease;
-}
-
-.sub-fade.sub-visible {
-  opacity: 1;
-  transform: translateY(0);
+@media (prefers-reduced-motion: reduce) {
+  .hero-eyebrow, .hero-headline, .hero-role, .hero-sub,
+  .hero-ctas, .hero-meta, .hero-scroll {
+    animation: none;
+  }
 }
 </style>

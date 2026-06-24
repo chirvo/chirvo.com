@@ -12,4 +12,20 @@ export default defineNuxtConfig({
     plugins: [tailwindcss()],
   },
   css: [join(dirname(fileURLToPath(import.meta.url)), "app/assets/css/main.css")],
+
+  // FOUC-prevention: read persisted theme and set data-theme on <html>
+  // before any CSS is applied or the page paints.
+  app: {
+    head: {
+      script: [
+        {
+          innerHTML:
+            "(function(){try{var t=localStorage.getItem('theme');" +
+            "document.documentElement.setAttribute('data-theme',t==='light'?'light':'dark')" +
+            "}catch(e){document.documentElement.setAttribute('data-theme','dark')}})();",
+          tagPosition: "head",
+        },
+      ],
+    },
+  },
 });

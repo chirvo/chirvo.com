@@ -1,22 +1,21 @@
 <template>
-  <section id="projects" ref="sectionRef" class="py-24 md:py-32 bg-base-100 relative overflow-hidden">
-    <div class="bg-glow-orb" data-parallax-orb="0.03" style="top: 10%; left: 15%;"></div>
-
-    <div class="container mx-auto px-6 relative z-10">
+  <section id="projects" ref="sectionRef" class="py-24 md:py-32 bg-base-100 relative overflow-hidden border-t border-border-subtle">
+    <div class="container mx-auto px-6 md:px-8 relative z-10">
       <!-- Section header -->
-      <div class="text-center mb-16 md:mb-20 reveal-slow">
-        <h2 class="section-title">{{ projectsContent.title }}</h2>
-        <div class="divider-gold w-24 mx-auto mt-6"></div>
+      <div class="max-w-2xl mb-16 md:mb-20 reveal-slow">
+        <span class="section-eyebrow mb-6">{{ eyebrow }}</span>
+        <h2 class="section-title mt-4">{{ projectsContent.title }}</h2>
       </div>
 
       <!-- Projects grid -->
-      <div class="grid md:grid-cols-3 gap-8">
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
         <ProjectCard
           v-for="(project, index) in projectsContentItems"
           :key="index"
           :project="project"
+          :index="index"
           class="reveal-slow"
-          :style="{ transitionDelay: `${index * 120}ms` }"
+          :style="{ transitionDelay: `${index * 100}ms` }"
         />
       </div>
     </div>
@@ -29,23 +28,19 @@ import { content } from '~/lib/content';
 import ProjectCard from '~/components/ProjectCard.vue';
 import { useLang } from '~/composables/useLang';
 import { useSectionReveal } from '~/composables/useScrollReveal';
-import { useParallaxOrbs } from '~/composables/useParallaxOrbs';
 
 const { lang } = useLang();
 const projectsContent = computed(() => content.static.projects[lang.value]);
-const projectsContentItems = computed(() => {
-  return content.shared.projects.items.map((project) => {
-    const langText = project[lang.value];
-    const result = { title: langText.title, description: langText.description, image: project.image, tags: project.tags };
-    return result;
-  });
-});
+const eyebrow = computed(() => lang.value === 'es' ? '03 — Trabajo' : '03 — Work');
+
+const projectsContentItems = computed(() =>
+  content.shared.projects.items.map((project) => {
+    const t = project[lang.value];
+    return { title: t.title, description: t.description, image: project.image, tags: project.tags };
+  })
+);
 
 const sectionRef = ref(null);
-const { observe } = useSectionReveal({ threshold: 0.1 });
-
-onMounted(() => {
-  if (sectionRef.value) observe(sectionRef.value);
-});
-useParallaxOrbs();
+const { observe } = useSectionReveal({ threshold: 0.05 });
+onMounted(() => { if (sectionRef.value) observe(sectionRef.value); });
 </script>
