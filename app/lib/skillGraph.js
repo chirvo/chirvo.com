@@ -150,25 +150,7 @@ export function buildSkillGraph(clusters, langCode) {
     sk.anchor = right ? 'start' : 'end';
   }
 
-  // Within-cluster edges (consecutive in cluster)
-  const withinEdges = [];
-  for (const cl of clusters) {
-    const sks = cl.skills;
-    const n = sks.length;
-    if (n < 2) continue;
-    for (let i = 0; i < n; i++) {
-      const a = skills.find((s) => s.name === sks[i].name);
-      const b = skills.find((s) => s.name === sks[(i + 1) % n].name);
-      if (!a || !b) continue;
-      withinEdges.push({
-        from: a.name,
-        to: b.name,
-        x1: a.x, y1: a.y, x2: b.x, y2: b.y,
-      });
-    }
-  }
-
-  // Bridge paths (curved bezier)
+  // Bridge paths (curved bezier) — curated cross-cluster only
   const bridges = [];
   const seen = new Set();
   for (const sk of skills) {
@@ -178,24 +160,13 @@ export function buildSkillGraph(clusters, langCode) {
       const b = skills.find((s) => s.name === bName);
       if (!b) continue;
       seen.add(key);
-      const mx = (sk.x + b.x) / 2;
-      const my = (sk.y + b.y) / 2;
-      const dx = b.x - sk.x;
-      const dy = b.y - sk.y;
-      const len = Math.sqrt(dx * dx + dy * dy) + 0.01;
-      const nx = -dy / len;
-      const ny = dx / len;
-      const sign = (bridges.length % 2 === 0) ? 1 : -1;
-      const curve = Math.min(40, len * 0.15) * sign;
-      const cx = mx + nx * curve;
-      const cy = my + ny * curve;
       bridges.push({
         from: sk.name,
-        to: b.name,
-        path: `M ${sk.x} ${sk.y} Q ${cx} ${cy} ${b.x} ${b.y}`,
+        to: bName,
+        x1: sk.x, y1: sk.y, x2: b.x, y2: b.y,
       });
     }
   }
 
-  return { clusters: homes, nodes: skills, withinEdges, bridges };
+  return { clusters: homes, nodes: skills, bridges };
 }
