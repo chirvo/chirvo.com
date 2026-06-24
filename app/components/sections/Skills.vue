@@ -1,44 +1,53 @@
 <template>
   <section id="skills" ref="sectionRef" class="py-24 md:py-32 bg-base-200 relative overflow-hidden border-t border-border-subtle">
     <div class="container mx-auto px-6 md:px-8 relative z-10">
+      <!-- Section header -->
       <div class="max-w-2xl mb-12 md:mb-16 reveal-slow">
         <span class="section-eyebrow mb-6">{{ eyebrow }}</span>
         <h2 class="section-title mt-4">{{ competenciesContent.title }}</h2>
         <p class="mt-5 text-base text-base-content-secondary">{{ hintText }}</p>
       </div>
 
-      <div ref="wrapRef" class="scene-wrap reveal-slow">
-        <canvas ref="canvasRef" class="scene-canvas"></canvas>
-        <!-- HTML labels layer -->
-        <div class="labels-layer" aria-hidden="true">
-          <div
-            v-for="(node, i) in nodes"
-            :key="'lbl-' + node.name"
-            class="skill-label"
-            :class="{
-              'is-hovered': hoveredSkill === node.name,
-              'is-active': activeSkill === node.name,
-              'is-dimmed': (hoveredSkill || activeSkill) && hoveredSkill !== node.name && activeSkill !== node.name
-            }"
-            :style="{
-              transform: `translate(${labelPositions[i]?.x ?? 0}px, ${labelPositions[i]?.y ?? 0}px)`,
-              opacity: (hoveredSkill === node.name || activeSkill === node.name) ? 1 : 0.55,
-            }"
-          >{{ node.name }}</div>
-        </div>
-        <!-- Cluster captions -->
-        <div
-          v-for="cl in clusters"
-          :key="'cl-' + cl.id"
-          class="cluster-caption"
-          :style="{ transform: `translate(${cl.cx}px, ${cl.cy - cl.ry - 36}px)` }"
+      <!-- Bento grid: one card per cluster -->
+      <div class="bento-grid reveal-slow">
+        <article
+          v-for="(cl, i) in clusterCards"
+          :key="cl.id"
+          :class="['bento-card', `cluster-${cl.id}`, { 'bento-featured': cl.id === 'ai' }]"
         >
-          <span class="cluster-caption-title">{{ cl.title }}</span>
-          <span class="cluster-caption-sub">{{ cl.subtitle }}</span>
-        </div>
+          <header class="bento-card-head">
+            <div class="bento-card-meta">
+              <span class="bento-card-num">{{ String(i + 1).padStart(2, '0') }}</span>
+              <span class="bento-card-count">
+                {{ cl.skills.length }} {{ technologiesLabel }}
+              </span>
+              <span v-if="cl.id === 'ai'" class="bento-card-badge">{{ sinceBadge }}</span>
+            </div>
+            <h3 class="bento-card-title">{{ cl.title[lang] }}</h3>
+            <p class="bento-card-subtitle">{{ cl.subtitle[lang] }}</p>
+          </header>
+
+          <div class="bento-chips">
+            <button
+              v-for="sk in sortedSkills(cl)"
+              :key="sk.name"
+              type="button"
+              :class="['bento-chip', `weight-${sk.weight}`, `cluster-${cl.id}`]"
+              @click="activeSkill = sk.name"
+            >
+              <span class="bento-chip-name">{{ sk.name }}</span>
+              <span
+                v-if="sk.bridges && sk.bridges.length"
+                class="bento-chip-dots"
+                :aria-label="sk.bridges.length + ' bridges'"
+              >{{ sk.bridges.length }}</span>
+            </button>
+          </div>
+        </article>
       </div>
     </div>
 
+    <!-- Detail popover -->
     <Teleport to="body">
       <Transition name="pop">
         <div
@@ -83,24 +92,25 @@
 </template>
 
 <script setup>
-import { computed, ref, onMounted, onUnmounted, watch, nextTick, reactive } from 'vue';
+import { computed, ref, onMounted, onUnmounted, watch, nextTick } from 'vue';
 import { content } from '~/lib/content';
 import { useLang } from '~/composables/useLang';
 import { useSectionReveal } from '~/composables/useScrollReveal';
 import { buildSkillGraph } from '~/lib/skillGraph';
-import { initSkillScene } from '~/lib/threeSkillScene';
 
 const { lang } = useLang();
 const competenciesContent = computed(() => content.static.competencies[lang.value]);
 const eyebrow = computed(() => (lang.value === 'es' ? '02 - Habilidades' : '02 - Skills'));
 const hintText = computed(() =>
   lang.value === 'es'
-    ? 'Veinte y tantos anos en un campo de constelaciones. Pasa el mouse, hace click en cualquier estrella.'
-    : 'Twenty-plus years as a field of stars. Hover, click any node to see the context.'
+    ? 'Veinte y tantos anos de stack, ordenado por donde mas impacto he tenido. Toca cualquier tecnologia para ver el contexto.'
+    : 'Twenty-plus years of stack, ordered by where I have had the most impact. Tap any technology for context.'
 );
 const sinceLabel = computed(() => (lang.value === 'es' ? 'Desde' : 'Since'));
 const bridgesLabel = computed(() => (lang.value === 'es' ? 'Puentes' : 'Bridges'));
 const closeLabel = computed(() => (lang.value === 'es' ? 'Cerrar' : 'Close'));
+const technologiesLabel = computed(() => (lang.value === 'es' ? 'tecnologias' : 'technologies'));
+const sinceBadge = computed(() => (lang.value === 'es' ? 'desde 2023' : 'since 2023'));
 
 const freqLabel = {
   daily: { en: 'Daily', es: 'Diario' },
@@ -109,34 +119,31 @@ const freqLabel = {
   occasional: { en: 'Occasional', es: 'Ocasional' },
 };
 
-const layout = computed(() => {
-  const clusters = content.static.competencies.clusters;
-  const g = buildSkillGraph(clusters, lang.value);
-  return {
-    clusters: g.clusters,
-    nodes: g.nodes.map((n) => ({
-      ...n,
-      context: lang.value === 'es' ? n.contextEs : n.contextEn,
-    })),
-    bridges: g.bridges,
-  };
-});
+const graph = computed(() =>
+  buildSkillGraph(content.static.competencies.clusters, lang.value)
+);
+const nodesByName = computed(() => graph.value.nodesByName);
 
-const nodes = computed(() => layout.value.nodes);
-const clusters = computed(() => layout.value.clusters);
-const nodesByName = computed(() => {
-  const m = {};
-  for (const n of nodes.value) m[n.name] = n;
-  return m;
-});
+const clusterCards = computed(() =>
+  content.static.competencies.clusters.map((cl) => ({
+    id: cl.id,
+    title: cl[lang.value].title,
+    subtitle: cl[lang.value].subtitle,
+    skills: cl.skills,
+  }))
+);
 
-const hoveredSkill = ref(null);
+function sortedSkills(cl) {
+  return [...cl.skills].sort((a, b) => b.weight - a.weight || a.name.localeCompare(b.name));
+}
+
+// Popover state
 const activeSkill = ref(null);
 const activeNode = computed(() => (activeSkill.value ? nodesByName.value[activeSkill.value] : null));
 const activeCluster = computed(() => (activeNode.value ? activeNode.value.cluster : null));
 const activeClusterTitle = computed(() => {
   if (!activeCluster.value) return '';
-  const cl = clusters.value.find((c) => c.id === activeCluster.value);
+  const cl = clusterCards.value.find((c) => c.id === activeCluster.value);
   return cl ? cl.title : '';
 });
 const activeBridges = computed(() => {
@@ -144,54 +151,34 @@ const activeBridges = computed(() => {
   return (activeNode.value.bridges || []).filter((b) => nodesByName.value[b]);
 });
 
-const wrapRef = ref(null);
-const canvasRef = ref(null);
+// Popover positioning
 const popRef = ref(null);
 const popoverStyle = ref({ display: 'none' });
 
-// Per-node projected screen positions, updated each frame
-const labelPositions = reactive(nodes.value.map(() => ({ x: 0, y: 0, visible: false })));
-
-let sceneApi = null;
-let frameCounter = 0;
-
-function startLabelProjection() {
-  function update() {
-    frameCounter++;
-    if (frameCounter % 2 !== 0) {
-      // Throttle to ~30fps for label DOM updates
-      requestAnimationFrame(update);
-      return;
-    }
-    if (!sceneApi) return;
-    for (let i = 0; i < nodes.value.length; i++) {
-      const p = sceneApi.project(nodes.value[i]);
-      labelPositions[i].x = p.x;
-      labelPositions[i].y = p.y;
-    }
-    requestAnimationFrame(update);
+function positionPopover() {
+  if (!activeSkill.value || !activeNode.value || !popRef.value) {
+    popoverStyle.value = { display: 'none' };
+    return;
   }
-  update();
-}
-
-function popoverPosFor(node) {
-  if (!canvasRef.value) return { display: 'none' };
-  const p = sceneApi ? sceneApi.project(node) : { x: 0, y: 0 };
-  const rect = canvasRef.value.getBoundingClientRect();
-  const screenX = rect.left + p.x;
-  const screenY = rect.top + p.y;
-  const pop = popRef.value;
-  const popW = pop ? pop.offsetWidth : 300;
-  const popH = pop ? pop.offsetHeight : 180;
-  const offset = 16;
+  // Center horizontally, near the clicked chip
+  const popW = popRef.value.offsetWidth || 320;
+  const popH = popRef.value.offsetHeight || 200;
   const edge = 12;
-  let left = screenX + offset;
-  let top = screenY - popH / 2;
-  if (left + popW > window.innerWidth - edge) left = screenX - popW - offset;
+  const target = event?.currentTarget;
+  let cx = window.innerWidth / 2;
+  let cy = window.innerHeight / 2;
+  if (target && target.getBoundingClientRect) {
+    const r = target.getBoundingClientRect();
+    cx = r.left + r.width / 2;
+    cy = r.top + r.height / 2;
+  }
+  let left = cx - popW / 2;
+  let top = cy - popH / 2;
   if (left < edge) left = edge;
+  if (left + popW > window.innerWidth - edge) left = window.innerWidth - popW - edge;
   if (top < edge) top = edge;
   if (top + popH > window.innerHeight - edge) top = window.innerHeight - popH - edge;
-  return {
+  popoverStyle.value = {
     position: 'fixed',
     top: `${top}px`,
     left: `${left}px`,
@@ -199,41 +186,32 @@ function popoverPosFor(node) {
   };
 }
 
-async function recomputePopover() {
-  if (!activeSkill.value || !activeNode.value) {
+async function recomputePopover(e) {
+  if (!activeSkill.value) {
     popoverStyle.value = { display: 'none' };
     return;
   }
   await nextTick();
-  popoverStyle.value = popoverPosFor(activeNode.value);
+  positionPopover(e);
 }
 
-watch(activeSkill, () => recomputePopover());
-
-function onWindowResize() {
-  if (activeNode.value) recomputePopover();
-}
-function onWindowScroll() {
-  activeSkill.value = null;
-}
-window.addEventListener('resize', onWindowResize);
-window.addEventListener('scroll', onWindowScroll, { passive: true });
-
-onMounted(() => {
-  sceneApi = initSkillScene(canvasRef.value, {
-    nodes: nodes.value,
-    bridges: layout.value.bridges,
-    onHover: (name) => { hoveredSkill.value = name; },
-    onClick: (name) => { activeSkill.value = activeSkill.value === name ? null : name; },
-    onBgClick: () => { activeSkill.value = null; },
-  });
-  startLabelProjection();
+watch(activeSkill, (n) => {
+  if (n) recomputePopover();
+  else popoverStyle.value = { display: 'none' };
 });
 
+function onResize() {
+  if (activeSkill.value) recomputePopover();
+}
+function onScroll() {
+  activeSkill.value = null;
+}
+window.addEventListener('resize', onResize);
+window.addEventListener('scroll', onScroll, { passive: true });
+
 onUnmounted(() => {
-  if (sceneApi) sceneApi.cleanup();
-  window.removeEventListener('resize', onWindowResize);
-  window.removeEventListener('scroll', onWindowScroll);
+  window.removeEventListener('resize', onResize);
+  window.removeEventListener('scroll', onScroll);
 });
 
 const sectionRef = ref(null);
@@ -242,93 +220,177 @@ onMounted(() => { if (sectionRef.value) observe(sectionRef.value); });
 </script>
 
 <style scoped>
-.scene-wrap {
-  position: relative;
-  width: 100%;
-  height: 820px;
-  border-radius: 18px;
-  overflow: hidden;
-  background:
-    radial-gradient(ellipse 60% 50% at 30% 30%, color-mix(in oklab, var(--color-primary) 5%, transparent), transparent 60%),
-    radial-gradient(ellipse 50% 50% at 80% 70%, color-mix(in oklab, var(--color-primary) 4%, transparent), transparent 60%);
-  border: 1px solid var(--color-border-subtle);
+/* ── Bento grid ───────────────────────────────────────── */
+.bento-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
 }
-.scene-canvas {
-  display: block;
-  width: 100%;
-  height: 100%;
-  cursor: default;
+@media (min-width: 768px) {
+  .bento-grid { grid-template-columns: repeat(2, 1fr); }
 }
-.labels-layer {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
+@media (min-width: 1100px) {
+  .bento-grid { grid-template-columns: repeat(4, 1fr); gap: 20px; }
 }
-.skill-label {
-  position: absolute;
-  top: 0; left: 0;
-  font-family: var(--font-mono);
-  font-size: 12.5px;
-  color: var(--color-base-content);
-  background: color-mix(in oklab, var(--color-base-200) 78%, transparent);
-  border: 1px solid color-mix(in oklab, var(--color-primary) 40%, transparent);
-  padding: 4px 10px;
-  border-radius: 999px;
-  white-space: nowrap;
-  transform-origin: 0 50%;
-  transition: opacity 0.18s ease, background 0.18s ease, color 0.18s ease, border-color 0.18s ease, font-size 0.18s ease;
-  letter-spacing: 0.01em;
-  pointer-events: none;
-  will-change: transform, opacity;
-  font-weight: 500;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
-}
-.skill-label.is-hovered,
-.skill-label.is-active {
-  color: var(--color-primary);
-  background: color-mix(in oklab, var(--color-base-200) 95%, transparent);
-  border-color: var(--color-primary);
-  font-size: 13.5px;
-}
-.skill-label.is-dimmed { opacity: 0.18 !important; }
 
-.cluster-caption {
-  position: absolute;
-  top: 0; left: 0;
-  text-align: center;
-  transform-origin: 50% 100%;
-  pointer-events: none;
+.bento-card {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 2px;
+  background: var(--color-base-200);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: 16px;
+  padding: 24px 24px 28px;
+  transition: border-color 0.2s ease, transform 0.2s ease, background 0.2s ease;
+  min-height: 280px;
 }
-.cluster-caption-title {
-  font-family: var(--font-display);
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--color-base-content);
-  letter-spacing: -0.005em;
-}
-.cluster-caption-sub {
-  font-family: var(--font-mono);
-  font-size: 9px;
-  color: var(--color-base-content-secondary);
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  opacity: 0.65;
-  max-width: 220px;
-  white-space: normal;
+.bento-card:hover {
+  border-color: var(--color-border-strong);
 }
 
+/* AI cluster gets featured treatment */
+.bento-featured {
+  background:
+    linear-gradient(140deg,
+      var(--color-base-200) 0%,
+      color-mix(in oklab, var(--color-primary) 8%, var(--color-base-200)) 100%);
+  border-color: color-mix(in oklab, var(--color-primary) 35%, var(--color-border-subtle));
+  box-shadow: 0 0 0 1px color-mix(in oklab, var(--color-primary) 12%, transparent);
+}
+.bento-featured:hover {
+  border-color: var(--color-primary);
+}
+
+.bento-card-head {
+  margin-bottom: 20px;
+}
+.bento-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--color-base-content-muted);
+  margin-bottom: 10px;
+}
+.bento-card-num { color: var(--color-primary); font-weight: 500; }
+.bento-card-count { opacity: 0.7; }
+.bento-featured .bento-card-num { color: var(--color-primary); }
+.bento-card-badge {
+  margin-left: auto;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--color-primary);
+  color: var(--color-base-100);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+}
+.bento-card-title {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+  color: var(--color-base-content);
+  margin-bottom: 6px;
+}
+.bento-card-subtitle {
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--color-base-content-secondary);
+}
+
+/* ── Chips ─────────────────────────────────────────────── */
+.bento-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: auto;
+}
+
+.bento-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  border-radius: 999px;
+  border: 1px solid;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  letter-spacing: 0.01em;
+  line-height: 1;
+  white-space: nowrap;
+}
+.bento-chip-name { display: inline-block; }
+
+/* Weight-driven sizing */
+.bento-chip.weight-5 {
+  font-size: 12.5px;
+  padding: 7px 12px;
+  border-color: var(--color-primary);
+  background: color-mix(in oklab, var(--color-primary) 14%, var(--color-base-200));
+  color: var(--color-base-content);
+}
+.bento-chip.weight-4 {
+  font-size: 11.5px;
+  padding: 5px 10px;
+  border-color: var(--color-border-strong);
+  background: var(--color-base-300);
+  color: var(--color-base-content);
+}
+.bento-chip.weight-3 {
+  font-size: 11px;
+  padding: 4px 9px;
+  border-color: var(--color-border-subtle);
+  background: color-mix(in oklab, var(--color-base-300) 70%, transparent);
+  color: var(--color-base-content-secondary);
+}
+.bento-chip.weight-2 {
+  font-size: 10.5px;
+  padding: 3px 8px;
+  border-color: var(--color-border-subtle);
+  background: transparent;
+  color: var(--color-base-content-muted);
+}
+
+.bento-chip:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  background: var(--color-primary-muted);
+  transform: translateY(-1px);
+}
+
+/* Bridge count dot */
+.bento-chip-dots {
+  font-size: 9px;
+  font-weight: 600;
+  background: var(--color-primary);
+  color: var(--color-base-100);
+  padding: 1px 5px;
+  border-radius: 999px;
+  line-height: 1.2;
+  min-width: 14px;
+  text-align: center;
+}
+.bento-chip.weight-2 .bento-chip-dots,
+.bento-chip.weight-3 .bento-chip-dots {
+  background: color-mix(in oklab, var(--color-primary) 70%, var(--color-base-400));
+}
+
+/* ── Popover ──────────────────────────────────────────── */
 .skill-popover {
-  width: 300px;
+  width: 320px;
   max-width: calc(100vw - 24px);
   background: var(--color-base-200);
   border: 1px solid var(--color-border-strong);
   border-radius: 14px;
   padding: 18px 20px 16px;
-  box-shadow: 0 0 0 1px var(--color-primary-muted), 0 18px 48px -16px rgba(0, 0, 0, 0.55);
+  box-shadow:
+    0 0 0 1px var(--color-primary-muted),
+    0 18px 48px -16px rgba(0, 0, 0, 0.55);
   font-size: 13px;
   line-height: 1.5;
   color: var(--color-base-content);
@@ -374,7 +436,10 @@ onMounted(() => { if (sectionRef.value) observe(sectionRef.value); });
   line-height: 1.55;
   margin: 0 0 14px;
 }
-.pop-bridges { border-top: 1px solid var(--color-border-subtle); padding-top: 12px; }
+.pop-bridges {
+  border-top: 1px solid var(--color-border-subtle);
+  padding-top: 12px;
+}
 .pop-bridges-label {
   display: block;
   font-family: var(--font-mono);
@@ -384,7 +449,11 @@ onMounted(() => { if (sectionRef.value) observe(sectionRef.value); });
   color: var(--color-base-content-muted);
   margin-bottom: 8px;
 }
-.pop-bridge-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.pop-bridge-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
 .bridge-chip {
   font-family: var(--font-mono);
   font-size: 10.5px;
@@ -403,11 +472,4 @@ onMounted(() => { if (sectionRef.value) observe(sectionRef.value); });
 }
 .pop-enter-active, .pop-leave-active { transition: opacity 0.15s ease, transform 0.15s ease; }
 .pop-enter-from, .pop-leave-to { opacity: 0; transform: translateY(4px); }
-
-@media (max-width: 900px) {
-  .scene-wrap { height: 640px; }
-  .cluster-caption-title { font-size: 13px; }
-  .cluster-caption-sub { font-size: 8px; }
-  .skill-label { font-size: 11px; }
-}
 </style>
