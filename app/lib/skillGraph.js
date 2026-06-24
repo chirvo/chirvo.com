@@ -11,10 +11,10 @@ function makeRng(seed) {
 }
 
 const CLUSTER_HOMES = [
-  { id: 'dev',         cx: 230,  cy: 270, rx: 175, ry: 150 },
-  { id: 'ai',          cx: 600,  cy: 160, rx: 170, ry: 130 },
-  { id: 'systems',     cx: 970,  cy: 270, rx: 175, ry: 150 },
-  { id: 'specialized', cx: 600,  cy: 560, rx: 175, ry: 125 },
+  { id: 'dev',         cx: 290,  cy: 320, rx: 220, ry: 190 },
+  { id: 'ai',          cx: 760,  cy: 195, rx: 215, ry: 165 },
+  { id: 'systems',     cx: 1230, cy: 320, rx: 220, ry: 190 },
+  { id: 'specialized', cx: 760,  cy: 690, rx: 220, ry: 155 },
 ];
 
 function runLayout(skills, homes, rng) {

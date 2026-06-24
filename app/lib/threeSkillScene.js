@@ -5,8 +5,8 @@
 
 import * as THREE from 'three';
 
-const VIEW_W = 1200;
-const VIEW_H = 730;
+const VIEW_W = 1500;
+const VIEW_H = 880;
 const VIEW_CX = VIEW_W / 2;
 const VIEW_CY = VIEW_H / 2;
 
@@ -41,8 +41,8 @@ export function initSkillScene(canvas, { nodes, bridges, onHover, onClick, onBgC
   const scene = new THREE.Scene();
   scene.background = null; // transparent — page bg shows through
 
-  const camera = new THREE.PerspectiveCamera(50, 1, 1, 5000);
-  camera.position.set(0, 0, 900);
+  const camera = new THREE.PerspectiveCamera(55, 1, 1, 5000);
+  camera.position.set(0, 0, 720);
   camera.lookAt(0, 0, 0);
 
   const renderer = new THREE.WebGLRenderer({
@@ -83,7 +83,7 @@ export function initSkillScene(canvas, { nodes, bridges, onHover, onClick, onBgC
     colors[i * 3 + 1] = Math.min(1, c.g + boost);
     colors[i * 3 + 2] = Math.min(1, c.b + boost);
 
-    sizes[i] = n.radius * 4.2;
+    sizes[i] = n.radius * 6.5;
   }
 
   const pointsGeom = new THREE.BufferGeometry();
@@ -143,9 +143,9 @@ export function initSkillScene(canvas, { nodes, bridges, onHover, onClick, onBgC
   const lineGeom = new THREE.BufferGeometry();
   lineGeom.setAttribute('position', new THREE.BufferAttribute(linePos, 3));
   const lineMat = new THREE.LineBasicMaterial({
-    color: 0xd4a853,
+    color: 0xf5c674,
     transparent: true,
-    opacity: 0.18,
+    opacity: 0.55,
     blending: THREE.AdditiveBlending,
     depthWrite: false,
     linewidth: 1,
@@ -234,8 +234,8 @@ export function initSkillScene(canvas, { nodes, bridges, onHover, onClick, onBgC
     // Mouse parallax — interpolate toward target
     cam.x += (target.x * 60 - cam.x) * 0.05;
     cam.y += (-target.y * 40 - cam.y) * 0.05;
-    camera.position.x = cam.x + Math.sin(t * 0.18) * 4;
-    camera.position.y = cam.y + Math.cos(t * 0.22) * 3;
+    camera.position.x = cam.x + Math.sin(t * 0.18) * 6;
+    camera.position.y = cam.y + Math.cos(t * 0.22) * 4;
     camera.lookAt(0, 0, 0);
 
     pointsMat.uniforms.uTime.value = t;
@@ -271,7 +271,7 @@ export function initSkillScene(canvas, { nodes, bridges, onHover, onClick, onBgC
     for (let i = 0; i < nodes.length; i++) {
       const n = nodes[i];
       const isHover = i === idx;
-      sizeAttr.array[i] = (n.radius * 4.2) * (isHover ? 1.8 : 1.0);
+      sizeAttr.array[i] = (n.radius * 6.5) * (isHover ? 1.6 : 1.0);
       const c = CLUSTER_COLORS[n.cluster] || CLUSTER_COLORS.dev;
       const boost = n.weight >= 5 ? 0.25 : 0;
       const hb = isHover ? 0.35 : 0;

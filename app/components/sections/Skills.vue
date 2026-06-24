@@ -22,7 +22,7 @@
             }"
             :style="{
               transform: `translate(${labelPositions[i]?.x ?? 0}px, ${labelPositions[i]?.y ?? 0}px)`,
-              opacity: (hoveredSkill === node.name || activeSkill === node.name) ? 1 : 0,
+              opacity: (hoveredSkill === node.name || activeSkill === node.name) ? 1 : 0.55,
             }"
           >{{ node.name }}</div>
         </div>
@@ -31,7 +31,7 @@
           v-for="cl in clusters"
           :key="'cl-' + cl.id"
           class="cluster-caption"
-          :style="{ transform: `translate(${cl.cx}px, ${cl.cy - cl.ry - 30}px)` }"
+          :style="{ transform: `translate(${cl.cx}px, ${cl.cy - cl.ry - 36}px)` }"
         >
           <span class="cluster-caption-title">{{ cl.title }}</span>
           <span class="cluster-caption-sub">{{ cl.subtitle }}</span>
@@ -245,7 +245,7 @@ onMounted(() => { if (sectionRef.value) observe(sectionRef.value); });
 .scene-wrap {
   position: relative;
   width: 100%;
-  height: 600px;
+  height: 820px;
   border-radius: 18px;
   overflow: hidden;
   background:
@@ -268,26 +268,29 @@ onMounted(() => { if (sectionRef.value) observe(sectionRef.value); });
   position: absolute;
   top: 0; left: 0;
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12.5px;
   color: var(--color-base-content);
-  background: color-mix(in oklab, var(--color-base-200) 75%, transparent);
-  border: 1px solid color-mix(in oklab, var(--color-primary) 35%, transparent);
-  padding: 3px 8px;
+  background: color-mix(in oklab, var(--color-base-200) 78%, transparent);
+  border: 1px solid color-mix(in oklab, var(--color-primary) 40%, transparent);
+  padding: 4px 10px;
   border-radius: 999px;
   white-space: nowrap;
   transform-origin: 0 50%;
-  transition: opacity 0.18s ease, background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+  transition: opacity 0.18s ease, background 0.18s ease, color 0.18s ease, border-color 0.18s ease, font-size 0.18s ease;
   letter-spacing: 0.01em;
   pointer-events: none;
   will-change: transform, opacity;
+  font-weight: 500;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
 }
 .skill-label.is-hovered,
 .skill-label.is-active {
   color: var(--color-primary);
-  background: color-mix(in oklab, var(--color-base-200) 92%, transparent);
+  background: color-mix(in oklab, var(--color-base-200) 95%, transparent);
   border-color: var(--color-primary);
+  font-size: 13.5px;
 }
-.skill-label.is-dimmed { opacity: 0 !important; }
+.skill-label.is-dimmed { opacity: 0.18 !important; }
 
 .cluster-caption {
   position: absolute;
@@ -402,8 +405,9 @@ onMounted(() => { if (sectionRef.value) observe(sectionRef.value); });
 .pop-enter-from, .pop-leave-to { opacity: 0; transform: translateY(4px); }
 
 @media (max-width: 900px) {
-  .scene-wrap { height: 480px; }
-  .cluster-caption-title { font-size: 12px; }
+  .scene-wrap { height: 640px; }
+  .cluster-caption-title { font-size: 13px; }
   .cluster-caption-sub { font-size: 8px; }
+  .skill-label { font-size: 11px; }
 }
 </style>
