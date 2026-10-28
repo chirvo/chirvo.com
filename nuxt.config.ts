@@ -1,30 +1,40 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 import { fileURLToPath } from "url";
 import { dirname, join } from "path";
-import tailwindcss from "@tailwindcss/vite";
 
 export default defineNuxtConfig({
   ssr: false,
   compatibilityDate: "2025-07-15",
-  devtools: { enabled: true },
-  modules: ["@nuxt/icon", "@nuxt/image"],
-  vite: {
-    plugins: [tailwindcss()],
-  },
+  devtools: { enabled: false },
+
   css: [join(dirname(fileURLToPath(import.meta.url)), "app/assets/css/main.css")],
 
-  // FOUC-prevention: read persisted theme and set data-theme on <html>
-  // before any CSS is applied or the page paints.
   app: {
     head: {
-      script: [
+      htmlAttrs: { lang: "en" },
+      title: "Irving Bermúdez — Full-Stack Engineer & Linux Specialist",
+      meta: [
+        { charset: "utf-8" },
+        { name: "viewport", content: "width=device-width, initial-scale=1" },
         {
-          innerHTML:
-            "(function(){try{var t=localStorage.getItem('theme');" +
-            "document.documentElement.setAttribute('data-theme',t==='light'?'light':'dark')" +
-            "}catch(e){document.documentElement.setAttribute('data-theme','dark')}})();",
-          tagPosition: "head",
+          name: "description",
+          content:
+            "Full-stack engineer and Linux specialist with 20+ years designing and shipping high-availability systems, from bare metal to the browser.",
         },
+        { name: "theme-color", content: "#fdf6e3" },
+        { property: "og:type", content: "website" },
+        { property: "og:title", content: "Irving Bermúdez — Full-Stack Engineer & Linux Specialist" },
+        {
+          property: "og:description",
+          content:
+            "20+ years of high-availability systems: Linux, distributed systems, cloud, and the whole stack in between.",
+        },
+        { property: "og:image", content: "/images/irving.jpg" },
+        { name: "twitter:card", content: "summary" },
+      ],
+      link: [
+        { rel: "icon", href: "/favicon.ico" },
+        { rel: "preload", as: "image", href: "/images/irving.jpg" },
       ],
     },
   },

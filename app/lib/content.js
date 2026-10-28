@@ -187,7 +187,7 @@ export const content = {
    */
   shared: {
     links: {
-      email: "bigchirv@gmail.com",
+      email: "irving@chirvo.com",
       linkedin: "https://www.linkedin.com/in/irvingbermudez",
       github: "https://github.com/chirvo",
     },
