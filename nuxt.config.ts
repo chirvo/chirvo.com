@@ -33,6 +33,7 @@ export default defineNuxtConfig({
         { name: "twitter:card", content: "summary" },
       ],
       link: [
+        { rel: "canonical", href: "https://chirvo.com/" },
         { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
         { rel: "icon", type: "image/x-icon", href: "/favicon.ico", sizes: "16x16 32x32 48x48" },
         { rel: "apple-touch-icon", href: "/apple-touch-icon.png" },
