@@ -326,6 +326,14 @@ strong { color: var(--base02); font-weight: 600; }
 }
 .btn:hover { text-decoration: none; transform: translateY(-1px); }
 
+/* icons inside buttons — inline SVG, inherits the button's colour */
+.btn svg {
+  width: 1.05em;
+  height: 1.05em;
+  flex: 0 0 auto;
+  display: block;
+}
+
 .btn-primary {
   background: var(--coral-500);
   color: #fff;
